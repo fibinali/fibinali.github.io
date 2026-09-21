@@ -84,3 +84,20 @@ h2 {
     font-size: 0.85rem;
     margin-top: 8px;
 }
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
