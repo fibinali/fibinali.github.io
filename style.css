@@ -1,23 +1,86 @@
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: #131c2e;
+    --text-color: #94a3b8;
+    --heading-color: #f8fafc;
+    --accent-color: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.15);
+    --border-color: #1e293b;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 20px;
-    background-color: #f9f9f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 60px 20px;
 }
-h1, h2, h3 {
-    color: #111;
+
+header {
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 30px;
 }
-a {
-    color: #0366d6;
+
+h1 {
+    color: var(--heading-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.badge {
+    display: inline-block;
+    background-color: var(--accent-glow);
+    color: var(--accent-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+h2 {
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.post-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+.post-card a {
+    color: var(--heading-color);
     text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
-a:hover {
-    text-decoration: underline;
+
+.post-card a:hover {
+    color: var(--accent-color);
 }
+
 .post-date {
-    color: #666;
-    font-size: 0.9rem;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-top: 8px;
 }
