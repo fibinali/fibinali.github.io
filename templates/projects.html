@@ -24,24 +24,9 @@
     <div class="grid" data-filter-list>
       {% for p in projects %}{{ project_card(p) }}{% endfor %}
     </div>
-    {{ empty_state(
-         title='No projects match this filter',
-         subtitle='No projects match the selected category filter. Try selecting another filter above.',
-         icon_name='search',
-         badge_text='Filter active',
-         attrs='data-filter-empty hidden',
-         action_label='Reset Filter',
-         action_attrs='data-filter-reset'
-       ) }}
+    {{ empty_state('No projects match this filter', 'Try selecting a different filter above.', icon_name='search', action_label='Reset filter', action_attrs='data-filter-reset', attrs='data-filter-empty hidden') }}
     {% else %}
-    {{ empty_state(
-         title='No projects published yet',
-         subtitle='New production builds and open-source labs are being documented. Check back soon or explore published articles.',
-         icon_name='flask',
-         badge_text='In Development',
-         action_label='Browse Articles',
-         action_url=root ~ 'articles/'
-       ) }}
+    {{ empty_state('No projects yet', 'Projects will be added here soon.', icon_name='flask') }}
     {% endif %}
   </div>
 </section>

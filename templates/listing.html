@@ -32,26 +32,9 @@
       {% for p in posts %}{{ card(p) }}{% endfor %}
     </div>
     {% if not posts %}
-    {{ empty_state(
-         title='No articles published yet',
-         subtitle='Research write-ups and technical notes are currently in progress. Explore other topics or check out recent projects in the meantime.',
-         icon_name=(topic.icon if topic else 'terminal'),
-         badge_text='In Progress',
-         action_label='Explore Projects',
-         action_url=root ~ 'projects/',
-         secondary_label='All Articles',
-         secondary_url=root ~ 'articles/'
-       ) }}
+    {{ empty_state('No articles yet', 'Articles in this topic are being drafted.', icon_name=(topic.icon if topic else 'inbox'), action_label='Browse all articles', action_url=root ~ 'articles/') }}
     {% endif %}
-    {{ empty_state(
-         title='No matches in this category',
-         subtitle='No articles match the selected category filter. Try selecting another filter above.',
-         icon_name='search',
-         badge_text='Filter active',
-         attrs='data-filter-empty hidden',
-         action_label='Reset Filter',
-         action_attrs='data-filter-reset'
-       ) }}
+    {{ empty_state('No matching articles', 'Try selecting a different filter above.', icon_name='search', action_label='Reset filter', action_attrs='data-filter-reset', attrs='data-filter-empty hidden') }}
   </div>
 </section>
 {% endblock %}

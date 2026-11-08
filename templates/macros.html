@@ -96,83 +96,25 @@
 </article>
 {% endmacro %}
 
-{% macro empty_state(title, subtitle, icon_name='inbox', badge_text='', action_label='', action_url='', action_attrs='', secondary_label='', secondary_url='', attrs='') %}
+{% macro empty_state(title, subtitle, icon_name='inbox', action_label='', action_url='', action_attrs='', attrs='') %}
 <div class="empty-state"{% if attrs %} {{ attrs|safe }}{% endif %}>
-  <div class="empty-state__art-wrap">
-    <div class="empty-state__glow" aria-hidden="true"></div>
-    <div class="empty-state__art" aria-hidden="true">
-      <svg class="empty-state__svg" width="130" height="130" viewBox="0 0 130 130" fill="none">
-        <defs>
-          <radialGradient id="esGlowGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="esPlateGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.22"/>
-            <stop offset="100%" stop-color="var(--accent-2, var(--accent))" stop-opacity="0.08"/>
-          </linearGradient>
-          <linearGradient id="esBorderGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="var(--accent)"/>
-            <stop offset="100%" stop-color="var(--accent-2, var(--accent))" stop-opacity="0.3"/>
-          </linearGradient>
-        </defs>
-        <circle class="es-halo" cx="65" cy="65" r="46" fill="url(#esGlowGrad)"/>
-        <ellipse class="es-shadow" cx="65" cy="106" rx="36" ry="10" fill="currentColor"/>
-        <g class="es-beams" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="2 3">
-          <line x1="33" y1="84" x2="33" y2="52"/>
-          <line x1="97" y1="84" x2="97" y2="52"/>
-          <line x1="65" y1="98" x2="65" y2="66"/>
-        </g>
-        <polygon class="es-base" points="65,70 97,84 65,98 33,84" fill="var(--bg-elev)" stroke="var(--line)" stroke-width="1.2"/>
-        <g class="es-mid">
-          <polygon points="65,54 97,68 65,82 33,68" fill="var(--bg-elev)" stroke="var(--line-strong)" stroke-width="1.2"/>
-          <line x1="52" y1="68" x2="78" y2="68" stroke="var(--line-strong)" stroke-width="1.4" stroke-linecap="round"/>
-        </g>
-        <g class="es-top">
-          <polygon points="65,34 99,49 65,64 31,49" fill="url(#esPlateGrad)" stroke="url(#esBorderGrad)" stroke-width="1.8"/>
-          <polygon points="65,39 91,50 65,60 39,50" fill="none" stroke="var(--accent)" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6"/>
-        </g>
-      </svg>
-      <div class="empty-state__core-badge">
-        {{ icon(icon_name, 22) }}
-      </div>
-    </div>
+  <div class="empty-state__icon" aria-hidden="true">
+    {{ icon(icon_name, 22) }}
   </div>
-
-  {% if badge_text %}
-  <div class="empty-state__pill">
-    <span class="empty-state__pulse"></span>
-    <span>{{ badge_text }}</span>
-  </div>
-  {% endif %}
-
   <h3 class="empty-state__title">{{ title }}</h3>
+  {% if subtitle %}
   <p class="empty-state__subtitle">{{ subtitle }}</p>
-
-  {% if action_label or secondary_label %}
-  <div class="empty-state__actions">
-    {% if action_label %}
-      {% if action_url %}
-      <a href="{{ action_url }}" class="btn btn--primary btn--sm"{% if action_attrs %} {{ action_attrs|safe }}{% endif %}>
-        {{ action_label }}
-      </a>
-      {% else %}
-      <button type="button" class="btn btn--primary btn--sm"{% if action_attrs %} {{ action_attrs|safe }}{% endif %}>
-        {{ action_label }}
-      </button>
-      {% endif %}
-    {% endif %}
-
-    {% if secondary_label %}
-      {% if secondary_url %}
-      <a href="{{ secondary_url }}" class="btn btn--ghost btn--sm">
-        {{ secondary_label }}
-      </a>
-      {% else %}
-      <button type="button" class="btn btn--ghost btn--sm">
-        {{ secondary_label }}
-      </button>
-      {% endif %}
+  {% endif %}
+  {% if action_label %}
+  <div class="empty-state__action">
+    {% if action_url %}
+    <a href="{{ action_url }}" class="text-link"{% if action_attrs %} {{ action_attrs|safe }}{% endif %}>
+      {{ action_label }} &rarr;
+    </a>
+    {% else %}
+    <button type="button" class="btn btn--ghost btn--sm"{% if action_attrs %} {{ action_attrs|safe }}{% endif %}>
+      {{ action_label }}
+    </button>
     {% endif %}
   </div>
   {% endif %}
