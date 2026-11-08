@@ -1,0 +1,19 @@
+<dialog class="search" id="search-dialog" aria-labelledby="search-title">
+  <h2 id="search-title" class="sr-only">Search articles</h2>
+  <div class="search__bar">
+    {{ icon('search', 20) }}
+    <input id="search-input" type="search" role="combobox" aria-expanded="true" aria-controls="search-results"
+           aria-autocomplete="list" aria-activedescendant="" placeholder="Search articles, tags and topics"
+           autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search">
+    <button type="button" class="search__close" data-search-close aria-label="Close search"><kbd class="kbd">Esc</kbd></button>
+  </div>
+  <div class="search__body">
+    <p class="search__status" id="search-status" role="status" aria-live="polite"></p>
+    <ul class="search__results" id="search-results" role="listbox" aria-label="Search results"></ul>
+  </div>
+  <div class="search__foot" aria-hidden="true">
+    <span><kbd class="kbd">&uarr;</kbd><kbd class="kbd">&darr;</kbd> to move</span>
+    <span><kbd class="kbd">&crarr;</kbd> to open</span>
+    <span><kbd class="kbd">Esc</kbd> to close</span>
+  </div>
+</dialog>

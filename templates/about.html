@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "macros.html" import breadcrumb, avatar with context %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    {{ breadcrumb([('Home', ''), ('About', 'about/')]) }}
+    <h1>About</h1>
+  </div>
+</section>
+
+<section class="section section--tight section--last">
+  <div class="container about">
+    <aside class="profile" aria-label="Profile">
+      {{ avatar(site.author.name, 'avatar--xl') }}
+      <h2>{{ site.author.name }}</h2>
+      <p class="profile__role">{{ site.author.role }}</p>
+      <p class="profile__bio">{{ site.author.bio }}</p>
+      <ul class="profile__links">
+        <li><a class="link-btn" href="{{ site.author.github }}" rel="me noopener">{{ icon('github', 16) }} GitHub</a></li>
+        <li><a class="link-btn" href="{{ site.author.linkedin }}" rel="me noopener">{{ icon('linkedin', 16) }} LinkedIn</a></li>
+        <li><a class="link-btn" href="{{ root }}feed.xml">{{ icon('rss', 16) }} RSS</a></li>
+      </ul>
+    </aside>
+
+    <div class="about__main">
+      <section aria-labelledby="hello-h">
+        <h2 id="hello-h">Hello</h2>
+        {% for para in about.intro %}<p>{{ para }}</p>{% endfor %}
+      </section>
+
+      <section aria-labelledby="interests-h">
+        <h2 id="interests-h">Technical interests</h2>
+        <ul class="interest-grid">
+          {% for i in about.interests %}
+          <li class="interest"><span class="interest__icon">{{ icon(i.icon, 20) }}</span><div><h3>{{ i.title }}</h3><p>{{ i.text }}</p></div></li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section aria-labelledby="ai-h">
+        <h2 id="ai-h">AI learning journey</h2>
+        <ol class="timeline topic-ai">
+          {% for s in about.ai_journey %}
+          <li><span class="timeline__when">{{ s.when }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <section aria-labelledby="sec-h">
+        <h2 id="sec-h">Cybersecurity learning journey</h2>
+        <ol class="timeline topic-cybersecurity">
+          {% for s in about.security_journey %}
+          <li><span class="timeline__when">{{ s.when }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <section aria-labelledby="tech-h">
+        <h2 id="tech-h">Technologies</h2>
+        <dl class="tech">
+          {% for group, items in about.technologies.items() %}
+          <div class="tech__row"><dt>{{ group }}</dt><dd><ul class="chips-static">{% for t in items %}<li>{{ t }}</li>{% endfor %}</ul></dd></div>
+          {% endfor %}
+        </dl>
+      </section>
+
+      <section aria-labelledby="proj-h">
+        <h2 id="proj-h">Projects</h2>
+        <ul class="mini-projects">
+          {% for p in projects[:4] %}
+          <li><div><h3>{{ p.name }}</h3><p>{{ p.description }}</p></div><a class="link-btn" href="{{ p.github }}" rel="noopener">{{ icon('github', 16) }} Code</a></li>
+          {% endfor %}
+        </ul>
+        <p><a class="text-link" href="{{ root }}projects/">See all {{ projects|length }} projects</a></p>
+      </section>
+    </div>
+  </div>
+</section>
+{% endblock %}

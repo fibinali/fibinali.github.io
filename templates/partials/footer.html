@@ -1,0 +1,56 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="{{ root }}" aria-label="{{ site.name }}, home">
+          <svg class="brand__mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect width="32" height="32" rx="9" fill="url(#bm)"/>
+            <path d="m10 11 5 5-5 5" fill="none" stroke="#0a0d1c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17.5 21.5H23" fill="none" stroke="#0a0d1c" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+          <span class="brand__name">{{ site.name }}<span class="brand__suffix">{{ site.brand_suffix }}</span></span>
+        </a>
+        <p>{{ site.description }}</p>
+        <ul class="social">
+          <li><a class="icon-btn" href="{{ site.author.github }}" rel="me noopener" aria-label="GitHub">{{ icon('github', 18) }}</a></li>
+          <li><a class="icon-btn" href="{{ site.author.linkedin }}" rel="me noopener" aria-label="LinkedIn">{{ icon('linkedin', 18) }}</a></li>
+          <li><a class="icon-btn" href="{{ root }}feed.xml" aria-label="RSS feed">{{ icon('rss', 18) }}</a></li>
+        </ul>
+      </div>
+
+      <nav aria-label="Footer navigation">
+        <h2 class="footer__h">Navigate</h2>
+        <ul>
+          <li><a href="{{ root }}">Home</a></li>
+          <li><a href="{{ root }}articles/">All articles</a></li>
+          <li><a href="{{ root }}tutorials/">Tutorials</a></li>
+          <li><a href="{{ root }}projects/">Projects</a></li>
+          <li><a href="{{ root }}tags/">Tags</a></li>
+          <li><a href="{{ root }}about/">About</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Footer categories">
+        <h2 class="footer__h">Categories</h2>
+        <ul>
+          {% for t in topics %}<li><a href="{{ root }}topics/{{ t.slug }}/">{{ t.name }}</a></li>{% endfor %}
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="footer__h">Elsewhere</h2>
+        <ul>
+          <li><a href="{{ site.author.github }}" rel="me noopener">GitHub</a></li>
+          <li><a href="{{ site.author.linkedin }}" rel="me noopener">LinkedIn</a></li>
+          <li><a href="{{ root }}feed.xml">RSS feed</a></li>
+          <li><a href="{{ root }}sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <p>&copy; {{ now.year }} {{ site.name }}. Articles are for education; only test systems you own or have permission to test.</p>
+      <p>Built with Python, Markdown and vanilla JavaScript. Hosted on GitHub Pages.</p>
+    </div>
+  </div>
+</footer>

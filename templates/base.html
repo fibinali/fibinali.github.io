@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="{{ site.language }}" data-root="{{ root }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_description }}">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fafbfd">
+  <meta name="author" content="{{ site.author.name }}">
+  {% set og_abs = og_image if og_image.startswith('http') else site.url ~ '/' ~ og_image %}
+
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ og_abs }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="{{ site.language }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_description }}">
+  <meta name="twitter:image" content="{{ og_abs }}">
+  {% if site.author.twitter %}<meta name="twitter:site" content="{{ site.author.twitter }}">
+  <meta name="twitter:creator" content="{{ site.author.twitter }}">{% endif %}
+
+  {% block head_extra %}{% endblock %}
+  <link rel="icon" href="{{ root }}assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} RSS feed" href="{{ root }}feed.xml">
+
+  {# Runs before first paint so there is no flash of the wrong theme. Light is the default. #}
+  <script>
+    (function () {
+      var d = document.documentElement, pref = 'light';
+      try { pref = localStorage.getItem('theme') || 'light'; } catch (e) {}
+      var t = pref === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : pref;
+      d.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+      d.setAttribute('data-theme-pref', pref);
+      d.classList.add('js');
+    })();
+  </script>
+  <link rel="stylesheet" href="{{ root }}assets/css/main.css?v={{ versions.css }}">
+  {% for ld in jsonld %}
+  <script type="application/ld+json">{{ ld|tojson }}</script>
+  {% endfor %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="top-sentinel" aria-hidden="true"></div>
+  {% include "partials/header.html" %}
+  <main id="main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
+  {% include "partials/search.html" %}
+  {% include "partials/lightbox.html" %}
+  <script src="{{ root }}assets/js/main.js?v={{ versions.js }}" defer></script>
+</body>
+</html>

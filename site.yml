@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────
+#  Site configuration
+# ─────────────────────────────────────────────────────────────
+
+# Brand ---------------------------------------------------------
+name: "Fibin Ali N"
+brand_suffix: "/dev"
+title: "Fibin Ali N | AI, Cybersecurity & Development Blog"
+tagline: "Learning, Building & Documenting AI, Cybersecurity and Development"
+description: "A personal learning blog where I document my journey through Flutter, AI/ML, cybersecurity, projects, experiments and the technologies I explore."
+language: "en"
+
+# Public URL. The GitHub Actions workflow overrides this automatically
+# (user site, project site or custom domain) — this value is only used
+# for local builds. No trailing slash needed.
+url: "https://fibinali.github.io"
+
+# Author / social -------------------------------------------------
+author:
+  name: "Fibin Ali N"
+  role: "AI & Security Learner"
+  bio: "I'm learning, building and documenting my journey through Flutter, AI/ML and cybersecurity."
+  avatar: "assets/img/avatar.svg"
+  github: "https://github.com/fibinali"
+  linkedin: "https://www.linkedin.com/in/fibin-ali-2a7a16297/"
+  twitter: ""
+
+# Default social-share image -------------------------------------
+og_image: "assets/img/og-default.png"
+
+# Math rendering --------------------------------------------------
+katex_base: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist"
+
+# Topics ----------------------------------------------------------
+# Every article has a `category`. Each category belongs to exactly
+# one topic.
+
+topics:
+
+  - slug: ai
+    name: Artificial Intelligence
+    short: AI
+    icon: cpu
+    description: "My journey through Python, machine learning, deep learning, LLMs, RAG and practical AI applications."
+    categories: [AI, Machine Learning, Deep Learning, LLMs, RAG]
+    keywords: [Python, Machine Learning, Deep Learning, LLMs, RAG, AI Agents]
+
+  - slug: cybersecurity
+    name: Cybersecurity
+    short: Cybersecurity
+    icon: shield
+    description: "Learning web security, penetration testing and practical cybersecurity through hands-on experiments and labs."
+    categories: [Cybersecurity, Web Security, Penetration Testing, Ethical Hacking]
+    keywords: [Web Security, Pentesting, OWASP, Burp Suite, Nmap, Wireshark, Kali Linux]
+
+  - slug: programming
+    name: Programming
+    short: Programming
+    icon: code
+    description: "Programming, Flutter development, backend development, APIs and the technologies I use while building projects."
+    categories: [Flutter, Python, Java, Backend, APIs]
+    keywords: [Flutter, Dart, Python, Java, Go, Backend, APIs, PostgreSQL]
+
+  - slug: projects
+    name: Projects
+    short: Projects
+    icon: flask
+    description: "Build logs and experiments from the projects I create while learning development, AI and cybersecurity."
+    categories: [Projects, Experiments, Build Logs]
+    keywords: [Projects, Build Logs, Experiments, Flutter Apps, AI Projects, Security Labs]

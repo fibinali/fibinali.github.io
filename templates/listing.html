@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, breadcrumb, empty_state with context %}
+
+{% block content %}
+<section class="page-head{% if topic %} topic-{{ topic.slug }}{% endif %}">
+  <div class="container">
+    {{ breadcrumb(crumbs) }}
+    <div class="page-head__row">
+      {% if topic %}<span class="page-head__icon">{{ icon(topic.icon, 28) }}</span>{% endif %}
+      <div>
+        <h1>{{ heading }}</h1>
+        <p class="page-head__lead">{{ intro }}</p>
+      </div>
+    </div>
+    {% if topic and topic.slug == 'projects' %}
+    <p class="page-head__note">Looking for the code? See the <a href="{{ root }}projects/">projects showcase</a>.</p>
+    {% endif %}
+    {% if filters|length > 1 %}
+    <div class="chips js-only" role="group" aria-label="Filter by category" data-filter-group>
+      <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All <span class="chip__n">{{ posts|length }}</span></button>
+      {% for f in filters %}
+      <button class="chip" type="button" data-filter="{{ f.slug }}" aria-pressed="false">{{ f.name }} <span class="chip__n">{{ f.count }}</span></button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section--tight section--last">
+  <div class="container">
+    <div class="grid" data-filter-list>
+      {% for p in posts %}{{ card(p) }}{% endfor %}
+    </div>
+    {% if not posts %}
+    {{ empty_state('Nothing here yet', 'New articles land regularly — check back soon, or explore another topic.') }}
+    {% endif %}
+    {{ empty_state('No matches in this category', 'Try a different filter above to see more articles.', icon_name='search', attrs='data-filter-empty hidden') }}
+  </div>
+</section>
+{% endblock %}

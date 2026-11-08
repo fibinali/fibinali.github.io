@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% from "macros.html" import breadcrumb, project_card with context %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container container--article">
+    {{ breadcrumb(crumbs) }}
+    <div class="project-head__top">
+      <h1>{{ project.name }}</h1>
+      <span class="status" data-status="{{ project.status|lower }}">{{ project.status }}</span>
+    </div>
+    <p class="page-head__lead">{{ project.tagline }}</p>
+    <ul class="chips-static" aria-label="Technologies">
+      {% for t in project.tech %}<li>{{ t }}</li>{% endfor %}
+    </ul>
+    <div class="project-head__cta">
+      {% if project.github %}
+      <a class="btn btn--primary" href="{{ project.github }}" rel="noopener">{{ icon('github', 18) }} View on GitHub</a>
+      {% else %}
+      <span class="btn btn--ghost btn--disabled" title="Repository is private">{{ icon('lock', 16) }} Private Repository</span>
+      {% endif %}
+      {% if project.demo %}<a class="btn btn--ghost" href="{{ project.demo }}" rel="noopener">{{ icon('external', 16) }} Live demo</a>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% if project.highlights %}
+<section class="section section--tight" aria-labelledby="highlights-h">
+  <div class="container container--article">
+    <h2 id="highlights-h" class="sr-only">Highlights</h2>
+    <ul class="highlights">
+      {% for h in project.highlights %}
+      <li>{{ icon('check', 15) }}<span>{{ h }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if project.screenshots %}
+<section class="section section--tight" aria-labelledby="shots-h">
+  <div class="container">
+    <h2 id="shots-h" class="sr-only">Screenshots</h2>
+    <div class="shot-grid">
+      {% for s in project.screenshots %}
+      <button class="shot-item" type="button" data-lightbox data-src="{{ root }}{{ s.src }}" data-caption="{{ s.alt }}">
+        <img src="{{ root }}{{ s.src }}" alt="{{ s.alt }}" loading="lazy" decoding="async">
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="section section--tight" aria-labelledby="shots-h">
+  <div class="container container--article">
+    <h2 id="shots-h" class="sr-only">Screenshots</h2>
+    <div class="no-shots">
+      <div class="no-shots__icon" aria-hidden="true">
+        {{ icon('image', 22) }}
+      </div>
+      <div class="no-shots__body">
+        <span class="no-shots__title">No screenshots available</span>
+        <span class="no-shots__desc">Visual preview has not been published for this project yet.</span>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if project.body_html %}
+<section class="section section--tight">
+  <div class="container article__layout">
+    {% if project.toc|length > 1 %}
+    <aside class="toc-col" aria-label="Table of contents">
+      <details class="toc" open>
+        <summary>On this page</summary>
+        <ol class="toc__list">
+          {% for h in project.toc %}
+          <li>
+            <a href="#{{ h.id }}">{{ h.name }}</a>
+            {% if h.children %}<ol>{% for c in h.children %}<li><a href="#{{ c.id }}">{{ c.name }}</a></li>{% endfor %}</ol>{% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </details>
+    </aside>
+    {% endif %}
+    <div class="prose" {% if project.has_math %}data-katex="{{ (root ~ site.katex_base) if not site.katex_base.startswith('http') else site.katex_base }}"{% endif %}>
+      {{ project.body_html|safe }}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if related %}
+<section class="section section--related" aria-labelledby="related-h">
+  <div class="container">
+    <div class="section__head"><h2 id="related-h">More projects</h2></div>
+    <div class="grid">
+      {% for p in related %}{{ project_card(p) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

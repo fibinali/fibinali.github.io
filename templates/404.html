@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="not-found">
+  <div class="container">
+    <p class="not-found__code" aria-hidden="true">404</p>
+    <h1>This page doesn't exist</h1>
+    <p>The link may be old, or the article may have moved. Try searching, or start from one of these pages.</p>
+    <div class="hero__cta">
+      <button class="btn btn--primary" type="button" data-search-open>{{ icon('search', 18) }} Search articles</button>
+      <a class="btn btn--ghost" href="{{ root }}">Back to home</a>
+      <a class="btn btn--ghost" href="{{ root }}articles/">All articles</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,54 @@
+# Content for the About page and the About preview on the homepage.
+
+preview: >-
+  I'm Fibin Ali N, an AI and security learner exploring Flutter, machine
+  learning, and web security. This blog is where I document what I learn,
+  the projects I build, the problems I solve, and the things I discover
+  along the way.
+
+intro:
+  - "Hi, I'm Fibin Ali N. I'm a developer and computer engineering student exploring AI engineering and cybersecurity."
+  - "I started programming in college with Flutter and gradually became interested in a wider range of technologies. Today, I'm learning AI/ML, LLMs, RAG systems, and web penetration testing while continuing to build practical applications."
+  - "This blog is my learning journal and portfolio. I write about the technologies I learn, the projects I build, the problems I face, and what I understand from solving them."
+
+interests:
+  - { icon: code, title: "Flutter & Development", text: "Building practical mobile and application projects with Flutter and exploring modern development technologies." }
+  - { icon: cpu, title: "AI & Machine Learning", text: "Learning machine learning, deep learning, LLMs, RAG systems and small AI agents through practical projects." }
+  - { icon: shield, title: "Cybersecurity", text: "Learning web penetration testing, understanding common vulnerabilities and exploring practical security techniques." }
+  - { icon: terminal, title: "Learning in Public", text: "Turning what I learn and build into tutorials, experiments and project write-ups." }
+
+ai_journey:
+  - when: "Starting"
+    title: "Python and machine learning"
+    text: "Started exploring AI with Python and the fundamentals of machine learning."
+  - when: "Next"
+    title: "Neural networks and deep learning"
+    text: "Learning how neural networks work and exploring the fundamentals of deep learning."
+  - when: "Now"
+    title: "LLMs and RAG"
+    text: "Exploring large language models, RAG applications and how AI systems can be built for practical use."
+  - when: "Exploring next"
+    title: "Small AI agents"
+    text: "Learning how AI agents work and experimenting with simple agent-based applications."
+
+security_journey:
+  - when: "Starting"
+    title: "Security fundamentals"
+    text: "Started exploring cybersecurity and learning the fundamentals behind common security concepts."
+  - when: "Learning"
+    title: "Web penetration testing"
+    text: "Practicing web penetration testing and learning how common web vulnerabilities work."
+  - when: "Projects"
+    title: "Practical security testing"
+    text: "Applied what I learned while testing web applications and documenting the findings and lessons."
+  - when: "Now"
+    title: "Security and AI"
+    text: "Continuing to explore cybersecurity while developing my skills toward a future career in security and AI engineering."
+
+technologies:
+  Languages: [Python, C, Java, SQL, Dart, HTML, CSS, JavaScript, Go]
+  "AI & data": [Machine Learning, Deep Learning, LLMs, RAG]
+  Security: [Burp Suite, Nmap, Wireshark, Kali Linux]
+  "Web & backend": [FastAPI, Spring Boot, PostgreSQL, Docker, Nginx]
+  Mobile: [Flutter, BLoC, Riverpod, Firebase, SQLite]
+  Cloud: [AWS, VPS, Git, GitHub, Basic Deployment]

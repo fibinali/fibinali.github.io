@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, badge, tag_list, breadcrumb, cover_src, avatar with context %}
+
+{% block head_extra %}
+  <meta property="article:published_time" content="{{ post.date|iso }}">
+  {% if post.updated %}<meta property="article:modified_time" content="{{ post.updated|iso }}">{% endif %}
+  <meta property="article:author" content="{{ post.author }}">
+  <meta property="article:section" content="{{ post.category }}">
+  {% for t in post.tags %}<meta property="article:tag" content="{{ t.name }}">
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+<div class="reading-progress" aria-hidden="true"><span></span></div>
+
+<article class="article topic-{{ post.topic }}">
+  <header class="container container--article article__header">
+    {{ breadcrumb(crumbs) }}
+    <p class="article__cat">{{ badge(post, link=true) }}{% if post.type == 'tutorial' %}<span class="badge badge--plain">Tutorial</span>{% endif %}</p>
+    <h1 class="article__title">{{ post.title }}</h1>
+    <p class="article__lead">{{ post.description }}</p>
+    <div class="article__meta">
+      <span class="byline">{{ avatar(post.author, 'avatar--sm') }}<span>By <a href="{{ root }}about/">{{ post.author }}</a></span></span>
+      <span class="meta__item">{{ icon('calendar', 15) }}<time datetime="{{ post.date|iso }}">{{ post.date|fmt_date }}</time></span>
+      {% if post.updated %}<span class="meta__item">Updated <time datetime="{{ post.updated|iso }}">{{ post.updated|fmt_date }}</time></span>{% endif %}
+      <span class="meta__item">{{ icon('clock', 15) }}{{ post.reading_time }} min read</span>
+    </div>
+  </header>
+
+  <div class="container container--article">
+    <figure class="article__hero">
+      <img src="{{ cover_src(post) }}" alt="{{ '' if post.cover_is_generated else (post.image_alt or '') }}" width="1200" height="630" fetchpriority="high" decoding="async">
+    </figure>
+  </div>
+
+  <div class="container article__layout">
+    {% if post.toc|length > 1 %}
+    <aside class="toc-col" aria-label="Table of contents">
+      <details class="toc" open>
+        <summary>On this page</summary>
+        <ol class="toc__list">
+          {% for h in post.toc %}
+          <li>
+            <a href="#{{ h.id }}">{{ h.name }}</a>
+            {% if h.children %}
+            <ol>{% for c in h.children %}<li><a href="#{{ c.id }}">{{ c.name }}</a></li>{% endfor %}</ol>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </details>
+    </aside>
+    {% endif %}
+
+    <div class="prose" {% if post.has_math %}data-katex="{{ (root ~ site.katex_base) if not site.katex_base.startswith('http') else site.katex_base }}"{% endif %}>
+      {{ post.html|safe }}
+      {% if post.tags %}
+      <div class="article__tags">
+        <span class="article__tags-label">{{ icon('tag', 15) }}<span>Tags</span></span>
+        {{ tag_list(post, 12) }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container container--article article__after">
+    <nav class="pn" aria-label="More articles">
+      {% if prev_post %}
+      <a class="pn__item" href="{{ root }}{{ prev_post.url }}" rel="prev">
+        <span class="pn__label">Previous article</span>
+        <span class="pn__title">{{ prev_post.title }}</span>
+      </a>
+      {% else %}<span></span>{% endif %}
+      {% if next_post %}
+      <a class="pn__item pn__item--next" href="{{ root }}{{ next_post.url }}" rel="next">
+        <span class="pn__label">Next article</span>
+        <span class="pn__title">{{ next_post.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+  </div>
+
+  {% if related %}
+  <section class="section section--related" aria-labelledby="related-h">
+    <div class="container">
+      <div class="section__head"><h2 id="related-h">Related articles</h2></div>
+      <div class="grid">
+        {% for p in related %}{{ card(p) }}{% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

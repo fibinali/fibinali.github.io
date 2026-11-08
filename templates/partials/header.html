@@ -1,0 +1,46 @@
+<header class="site-header" id="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ root }}" aria-label="{{ site.name }}, home">
+      <svg class="brand__mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8aa4ff"/><stop offset="1" stop-color="#b79cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="9" fill="url(#bm)"/>
+        <path d="m10 11 5 5-5 5" fill="none" stroke="#0a0d1c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17.5 21.5H23" fill="none" stroke="#0a0d1c" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">{{ site.name }}<span class="brand__suffix">{{ site.brand_suffix }}</span></span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <ul class="nav__list">
+        {% for key, label, href in nav %}
+        <li><a class="nav__link" href="{{ root }}{{ href }}"{% if nav_active == key %} aria-current="page"{% endif %}>{{ label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <button class="search-btn" type="button" data-search-open aria-label="Search articles" aria-keyshortcuts="Control+K Meta+K">
+        {{ icon('search', 18) }}
+        <span class="search-btn__label">Search</span>
+        <kbd class="kbd" data-kbd>Ctrl K</kbd>
+      </button>
+
+      <div class="theme" data-theme-menu>
+        <button class="icon-btn" type="button" id="theme-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="theme-panel" aria-label="Color theme">
+          <span class="theme-icon theme-icon--dark">{{ icon('moon', 18) }}</span>
+          <span class="theme-icon theme-icon--light">{{ icon('sun', 18) }}</span>
+        </button>
+        <div class="theme__panel" id="theme-panel" role="group" aria-label="Color theme" hidden>
+          <button type="button" data-theme-set="dark" aria-pressed="false">{{ icon('moon', 16) }}<span>Dark</span>{{ icon('check', 16, 'i-check') }}</button>
+          <button type="button" data-theme-set="light" aria-pressed="false">{{ icon('sun', 16) }}<span>Light</span>{{ icon('check', 16, 'i-check') }}</button>
+          <button type="button" data-theme-set="system" aria-pressed="false">{{ icon('monitor', 16) }}<span>System</span>{{ icon('check', 16, 'i-check') }}</button>
+        </div>
+      </div>
+
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle__open">{{ icon('menu', 20) }}</span>
+        <span class="nav-toggle__close">{{ icon('close', 20) }}</span>
+      </button>
+    </div>
+  </div>
+</header>

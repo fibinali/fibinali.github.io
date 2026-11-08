@@ -1,0 +1,88 @@
+# Projects showcase. Each entry gets a card on /projects/ AND its own detail
+# page at /projects/<slug>/ (the slug is the name, lowercased and hyphenated).
+#
+# Required:  name, description, tech, filters, status, github
+# Optional:
+#   demo         — live URL; omit or leave "" if there isn't one
+#   featured     — true puts it in the homepage "Featured project" slot
+#   preview      — terminal-style lines shown only in the homepage feature slot
+#   tagline      — a longer one-liner for the detail page header (falls back
+#                  to `description` if omitted)
+#   highlights   — a short bullet list of standout features, shown on the
+#                  detail page under a checkmark list
+#   screenshots  — a gallery of images for the detail page. Each item is
+#                  either a plain path string or {src, alt}. Paths are
+#                  relative to the site root, so drop your own image at
+#                  e.g. static/assets/img/projects/<slug>/1.png and
+#                  reference it here as assets/img/projects/<slug>/1.png.
+#
+# filters: any of  ai | cybersecurity | flutter | backend | web
+# status:  Active | Completed | Experimental | Archived
+#
+# For a longer write-up than fits in `description`, add a Markdown file at
+# content/projects/<slug>.md (plain Markdown, no front matter needed).
+# It renders below the gallery on the detail page automatically if present.
+
+- name: Stavoya
+  tagline: A mobile hotel booking and e-commerce application engineered with Flutter, BLoC state management, and Stripe checkout.
+  description: Solo Flutter frontend development for a hotel booking app featuring real-time room discovery, custom calendar date selection, guest counters, BLoC state handling, and secure Stripe payment integration.
+  tech:
+    - Flutter
+    - Dart
+    - BLoC
+    - Stripe
+    - REST API
+  filters:
+    - flutter
+  status: Completed
+  github: ""
+  demo: ""
+  featured: true
+  preview:
+    - "$ stavoya --inspect-architecture"
+    - "Flutter 3.x (Dart) · State: BLoC pattern"
+    - "Payments: Stripe SDK · Auth: JWT session management"
+    - "Features: Interactive calendar, filters, booking pipeline, deep links"
+  highlights:
+    - "End-to-end hotel booking cycle: date-range picking, guest allocation, room selection, and instant summary"
+    - "BLoC architecture for predictable state management across multi-step reservation flows"
+    - "In-app Stripe mobile SDK payment sheet integration with payment intent validation"
+    - "Custom interactive UI: animated date-picker calendar, modal bottom sheets, and hero image gallery"
+    - "Push notifications and deep linking support for reservation confirmations and reminders"
+
+- name: Aigosys
+  tagline: A student-centric mobile education platform built with Flutter, BLoC architecture, and a Go backend.
+  description: Company mobile learning application built in Flutter with BLoC state management and Firebase, interfacing with a Go backend. Features structured course modules, interactive timed quizzes, student progress analytics, and deep linking.
+  tech:
+    - Flutter
+    - Dart
+    - BLoC
+    - Firebase
+    - Go REST API
+  filters:
+    - flutter
+  status: Active
+  github: ""
+  demo: ""
+  featured: false
+  preview:
+    - "$ aigosys --status"
+    - "Flutter 3.x (Dart) · State: BLoC pattern"
+    - "Backend: Go REST API · Cloud: Firebase FCM"
+    - "Phase 1: Completed · Development: Active"
+  highlights:
+    - "Structured modular course delivery with interactive lessons, video streaming, and study resources"
+    - "Interactive timed quiz and assessment engine with instantaneous score calculation and review modes"
+    - "Real-time student progress tracking and learning analytics synchronized with a Go backend"
+    - "Firebase Cloud Messaging (FCM) integration for assignment reminders, exam alerts, and announcements"
+    - "Deep linking navigation allowing students to open specific courses and quizzes directly from push notifications"
+  screenshots:
+    - src: assets/img/projects/aigosys/1.jpg
+      alt: Aigosys student dashboard and enrolled course catalog
+    - src: assets/img/projects/aigosys/2.jpg
+      alt: Interactive timed quiz and assessment screen
+    - src: assets/img/projects/aigosys/3.jpg
+      alt: Student learning progress and performance analytics
+    - src: assets/img/projects/aigosys/4.jpg
+      alt: Course module viewer and study materials
+

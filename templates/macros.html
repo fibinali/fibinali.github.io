@@ -1,0 +1,109 @@
+{# Shared building blocks. Import with:  {% from "macros.html" import card with context %} #}
+
+{% macro cover_src(p) %}{{ p.cover if p.cover.startswith('http') else root ~ p.cover }}{% endmacro %}
+
+{% macro badge(p, link=false) %}
+{% if link %}<a class="badge topic-{{ p.topic }}" href="{{ root }}topics/{{ p.topic }}/">{{ p.category }}</a>
+{% else %}<span class="badge topic-{{ p.topic }}">{{ p.category }}</span>{% endif %}
+{% endmacro %}
+
+{% macro meta(p) %}
+<div class="meta">
+  <span class="meta__item">{{ icon('calendar', 14) }}<time datetime="{{ p.date|iso }}">{{ p.date|fmt_date }}</time></span>
+  <span class="meta__item">{{ icon('clock', 14) }}{{ p.reading_time }} min read</span>
+</div>
+{% endmacro %}
+
+{% macro avatar(name, cls='', src=none) %}
+{% set av = src if src is not none else site.author.avatar %}
+{% if av %}
+<span class="avatar {{ cls }} avatar--img" aria-hidden="true"><img src="{{ av if av.startswith('http') else root ~ av }}" alt="{{ name }}" width="96" height="96" loading="lazy" decoding="async"></span>
+{% else %}
+<span class="avatar {{ cls }}" aria-hidden="true">{{ name.split()|map('first')|join|upper }}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro tag_list(p, limit=3) %}
+{% if p.tags %}
+<ul class="tags" aria-label="Tags">
+  {% for t in p.tags[:limit] %}<li><a class="tag" href="{{ root }}tags/{{ t.slug }}/">#{{ t.name }}</a></li>{% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+
+{# Standard grid card #}
+{% macro card(p) %}
+<article class="card topic-{{ p.topic }} reveal" data-category="{{ p.category_slug }}">
+  <div class="card__top">{{ badge(p) }}</div>
+  <h3 class="card__title"><a href="{{ root }}{{ p.url }}">{{ p.title }}</a></h3>
+  <p class="card__desc">{{ p.description }}</p>
+  {{ tag_list(p) }}
+  <div class="card__foot">
+    {{ meta(p) }}
+    <span class="card__more" aria-hidden="true">Read Article {{ icon('arrow', 16) }}</span>
+  </div>
+</article>
+{% endmacro %}
+
+{# Featured cards: "lead" has a large cover; "side" is compact with a small thumbnail #}
+{% macro featured_card(p, lead=false) %}
+<article class="card feature topic-{{ p.topic }}{% if lead %} feature--lead{% else %} feature--side{% endif %} reveal" data-category="{{ p.category_slug }}">
+  <img class="feature__cover" src="{{ cover_src(p) }}" alt="" width="1200" height="630" loading="{{ 'eager' if lead else 'lazy' }}" decoding="async">
+  <div class="feature__body">
+    <div class="card__top">{{ badge(p) }}</div>
+    <h3 class="card__title"><a href="{{ root }}{{ p.url }}">{{ p.title }}</a></h3>
+    <p class="card__desc">{{ p.description }}</p>
+    {% if lead %}{{ tag_list(p, 4) }}{% endif %}
+    <div class="card__foot">
+      {{ meta(p) }}
+      <span class="card__more" aria-hidden="true">Read Article {{ icon('arrow', 16) }}</span>
+    </div>
+  </div>
+</article>
+{% endmacro %}
+
+{% macro breadcrumb(crumbs) %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    {% for name, url in crumbs %}
+    <li>{% if loop.last %}<span aria-current="page">{{ name }}</span>{% else %}<a href="{{ root }}{{ url }}">{{ name }}</a>{{ icon('chevron', 14) }}{% endif %}</li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endmacro %}
+
+{% macro project_card(p) %}
+<article class="card project-card reveal" data-category="{{ p.filters|join(' ') }}">
+  <div class="project-card__body">
+    <div class="project-card__head">
+      <h2 class="card__title"><a href="{{ root }}projects/{{ p.slug }}/">{{ p.name }}</a></h2>
+      <span class="status" data-status="{{ p.status|lower }}">{{ p.status }}</span>
+    </div>
+    <p class="card__desc card__desc--full">{{ p.description }}</p>
+    <ul class="chips-static" aria-label="Technologies">
+      {% for t in p.tech %}<li>{{ t }}</li>{% endfor %}
+    </ul>
+    <div class="project-card__links">
+      <a class="link-btn" href="{{ root }}projects/{{ p.slug }}/">{{ icon('arrow', 15) }} Details</a>
+      {% if p.github %}
+      <a class="link-btn" href="{{ p.github }}" rel="noopener">{{ icon('github', 16) }} GitHub</a>
+      {% else %}
+      <span class="link-btn link-btn--disabled" title="Repository is private">{{ icon('lock', 14) }} Private</span>
+      {% endif %}
+      {% if p.demo %}<a class="link-btn" href="{{ p.demo }}" rel="noopener">{{ icon('external', 15) }} Demo</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endmacro %}
+
+{% macro empty_state(title, subtitle, icon_name='inbox', attrs='') %}
+<div class="empty-state"{% if attrs %} {{ attrs|safe }}{% endif %}>
+  <div class="empty-state__art" aria-hidden="true">
+    <span class="empty-state__ring empty-state__ring--1"></span>
+    <span class="empty-state__ring empty-state__ring--2"></span>
+    <span class="empty-state__icon">{{ icon(icon_name, 26) }}</span>
+  </div>
+  <h3 class="empty-state__title">{{ title }}</h3>
+  <p class="empty-state__subtitle">{{ subtitle }}</p>
+</div>
+{% endmacro %}

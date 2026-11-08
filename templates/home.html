@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, featured_card, avatar with context %}
+
+{% block content %}
+{# ───────── Hero ───────── #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__glow"></div>
+    <div class="hero__grid"></div>
+    {{ hero_network() }}
+  </div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <div class="hero__who">
+        {{ avatar(site.author.name) }}
+        <p><strong>{{ site.author.name }}</strong><span>{{ site.author.role }}</span></p>
+      </div>
+      <h1 class="hero__title" id="hero-title">{{ site.tagline }}</h1>
+      <p class="hero__lead">Practical tutorials, technical experiments, security research and AI projects. Everything here is written to be reproduced on your own machine.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="{{ root }}articles/">Explore Articles</a>
+        <a class="btn btn--ghost" href="{{ root }}about/">About Me</a>
+      </div>
+      {% if newest %}
+      <a class="hero__latest" href="{{ root }}{{ newest.url }}">
+        <span class="hero__latest-tag">New</span>
+        <span class="hero__latest-title">{{ newest.title }}</span>
+        {{ icon('arrow', 16) }}
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="hero__visual">
+      <div class="term" role="img" aria-label="Animated terminal: a prompt-injection scanner checks three messages and blocks one of them">
+        <div class="term__bar">
+          <span class="term__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="term__title">guard: scan</span>
+        </div>
+        <div class="term__body" aria-hidden="true">
+          <div class="term__line" style="--i:0"><span class="t-prompt">$</span> guard scan inbox.jsonl</div>
+          <div class="term__line t-dim" style="--i:1">loading prompt-guard-v2 ....... ok</div>
+          <div class="term__line t-dim" style="--i:2">3 messages queued</div>
+          <div class="term__line" style="--i:3">&nbsp;</div>
+          <div class="term__line" style="--i:4">  <span class="t-ok">pass </span> <span class="t-dim">0.02</span>  "Summarise this article"</div>
+          <div class="term__line" style="--i:5">  <span class="t-ok">pass </span> <span class="t-dim">0.01</span>  "Translate to French: Bonj&hellip;"</div>
+          <div class="term__line" style="--i:6">  <span class="t-bad">block</span> <span class="t-dim">0.97</span>  "Ignore previous instructi&hellip;"</div>
+          <div class="term__line" style="--i:7">&nbsp;</div>
+          <div class="term__line" style="--i:8"><span class="t-ok">&#10003;</span> 1 injection blocked, 2 clean <span class="t-dim">(38 ms)</span></div>
+          <div class="term__line" style="--i:9"><span class="t-prompt">$</span> <span class="term__cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ───────── Featured ───────── #}
+{% if featured %}
+<section class="section" aria-labelledby="featured-h">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <h2 id="featured-h">Featured articles</h2>
+        <p class="section__sub">The longer reads I'd start with.</p>
+      </div>
+      <a class="text-link" href="{{ root }}articles/">All articles</a>
+    </div>
+    <div class="featured">
+      {{ featured_card(featured[0], lead=true) }}
+      <div class="featured__side">
+        {% for p in featured[1:] %}{{ featured_card(p) }}{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ───────── Latest ───────── #}
+<section class="section" aria-labelledby="latest-h">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <h2 id="latest-h">Latest articles</h2>
+        <p class="section__sub">Fresh tutorials, experiments and notes from the lab.</p>
+      </div>
+      <a class="text-link" href="{{ root }}articles/">Browse all {{ posts|length }}</a>
+    </div>
+    <div class="grid">
+      {% for p in latest %}{{ card(p) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ───────── Topics ───────── #}
+<section class="section" aria-labelledby="topics-h">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <h2 id="topics-h">Topics</h2>
+        <p class="section__sub">Four areas I keep coming back to. Each has its own page.</p>
+      </div>
+    </div>
+    <div class="topic-grid">
+      {% for t in topics %}
+      <a class="topic-card topic-{{ t.slug }} reveal" href="{{ root }}topics/{{ t.slug }}/">
+        <span class="topic-card__icon">{{ icon(t.icon, 22) }}</span>
+        <h3>{{ t.name }}</h3>
+        <p>{{ t.description }}</p>
+        <ul class="topic-card__kw" aria-label="Subtopics">
+          {% for k in t.keywords[:4] %}<li>{{ k }}</li>{% endfor %}
+        </ul>
+        <span class="topic-card__foot"><span>{{ t.count }} article{{ '' if t.count == 1 else 's' }}</span><span class="card__more" aria-hidden="true">Explore {{ icon('arrow', 16) }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ───────── Featured project ───────── #}
+{% if feat_project %}
+<section class="section" aria-labelledby="project-h">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <h2 id="project-h">Featured project</h2>
+        <p class="section__sub">Something I built, broke and rebuilt.</p>
+      </div>
+      <a class="text-link" href="{{ root }}projects/">All projects</a>
+    </div>
+    <div class="project-feature reveal">
+      <div class="project-feature__copy">
+        <div class="project-feature__title">
+          <h3>{{ feat_project.name }}</h3>
+          <span class="status" data-status="{{ feat_project.status|lower }}">{{ feat_project.status }}</span>
+        </div>
+        <p>{{ feat_project.description }}</p>
+        <ul class="chips-static" aria-label="Technologies">
+          {% for t in feat_project.tech %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        <div class="project-feature__cta">
+          <a class="btn btn--primary" href="{{ root }}projects/{{ feat_project.slug }}/">{{ icon('arrow', 18) }} View Project</a>
+          {% if feat_project.github %}
+          <a class="btn btn--ghost" href="{{ feat_project.github }}" rel="noopener">{{ icon('github', 18) }} GitHub</a>
+          {% else %}
+          <span class="btn btn--ghost btn--disabled" title="Repository is private">{{ icon('lock', 16) }} Private Repo</span>
+          {% endif %}
+          {% if feat_project.demo %}<a class="btn btn--ghost" href="{{ feat_project.demo }}" rel="noopener">{{ icon('external', 16) }} Live demo</a>{% endif %}
+        </div>
+      </div>
+      {% if feat_project.preview %}
+      <div class="term term--small" role="img" aria-label="Sample output from {{ feat_project.name }}">
+        <div class="term__bar"><span class="term__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term__title">{{ feat_project.name|lower }}</span></div>
+        <div class="term__body term__body--static" aria-hidden="true">
+          {% for line in feat_project.preview %}
+          <div class="term__line">{% if line.startswith('$') %}<span class="t-prompt">$</span>{{ line[1:] }}{% elif line.startswith('ok') %}<span class="t-ok">ok</span>{{ line[2:] }}{% elif line.startswith('!') %}<span class="t-bad">!</span>{{ line[1:] }}{% else %}<span class="t-dim">{{ line }}</span>{% endif %}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ───────── About preview ───────── #}
+<section class="section" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about-preview reveal">
+      {{ avatar(site.author.name, 'avatar--xl') }}
+      <div>
+        <h2 id="about-h">Hi, I'm {{ site.author.name.split()[0] }}</h2>
+        <p>{{ about.preview }}</p>
+        <div class="about-preview__cta">
+          <a class="btn btn--ghost" href="{{ root }}about/">More about me</a>
+          <a class="icon-btn" href="{{ site.author.github }}" rel="me noopener" aria-label="GitHub">{{ icon('github', 18) }}</a>
+          <a class="icon-btn" href="{{ site.author.linkedin }}" rel="me noopener" aria-label="LinkedIn">{{ icon('linkedin', 18) }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ───────── RSS ───────── #}
+<section class="section section--last" aria-labelledby="rss-h">
+  <div class="container">
+    <div class="rss-card reveal">
+      <div>
+        <h2 id="rss-h">Follow along with RSS</h2>
+        <p>No account and no tracking. Add the feed to any reader and new articles show up when they're published.</p>
+      </div>
+      <div class="rss-card__actions">
+        <div class="copy-field">
+          <input type="text" readonly value="{{ site.url }}/feed.xml" aria-label="RSS feed URL" data-copy-source>
+          <button type="button" class="btn btn--ghost btn--sm" data-copy-btn>{{ icon('copy', 16) }}<span>Copy</span></button>
+        </div>
+        <a class="btn btn--primary" href="{{ root }}feed.xml">{{ icon('rss', 18) }} Open feed</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

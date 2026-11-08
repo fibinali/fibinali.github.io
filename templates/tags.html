@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "macros.html" import breadcrumb with context %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    {{ breadcrumb([('Home', ''), ('Tags', 'tags/')]) }}
+    <h1>Tags</h1>
+    <p class="page-head__lead">{{ tags|length }} tags across {{ posts_total if posts_total else 'all' }} articles. Larger tags have more articles.</p>
+  </div>
+</section>
+<section class="section section--tight section--last">
+  <div class="container">
+    <ul class="tag-cloud">
+      {% for t in tags %}
+      <li>
+        <a class="tag-pill tag-pill--w{{ 1 if t.posts|length < 2 else (2 if t.posts|length < 4 else 3) }}" href="{{ root }}tags/{{ t.slug }}/">
+          <span>#{{ t.name }}</span><span class="tag-pill__n">{{ t.posts|length }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}
