@@ -363,6 +363,96 @@
   })();
 
   /* ---------------------------------------------------------------------
+   * Screenshot Gallery Pagination (5 per page)
+   * ------------------------------------------------------------------- */
+  (function paginationModule() {
+    var grid = document.querySelector("[data-paginate-grid]");
+    var nav = document.querySelector("[data-paginate-nav]");
+    if (!grid || !nav) return;
+
+    var pageSize = parseInt(grid.getAttribute("data-page-size") || "5", 10);
+    var items = Array.prototype.slice.call(grid.querySelectorAll(".shot-item"));
+    if (items.length <= pageSize) {
+      nav.hidden = true;
+      return;
+    }
+
+    var totalPages = Math.ceil(items.length / pageSize);
+    var currentPage = 1;
+
+    function renderPage(page) {
+      currentPage = Math.max(1, Math.min(page, totalPages));
+      var start = (currentPage - 1) * pageSize;
+      var end = start + pageSize;
+
+      items.forEach(function (item, idx) {
+        item.hidden = idx < start || idx >= end;
+      });
+
+      renderControls();
+    }
+
+    function renderControls() {
+      nav.innerHTML = "";
+
+      // Prev button
+      var prevBtn = document.createElement("button");
+      prevBtn.type = "button";
+      prevBtn.className = "shot-pagination__btn shot-pagination__btn--prev";
+      prevBtn.innerHTML = "&larr; Prev";
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.setAttribute("aria-label", "Previous page");
+      prevBtn.addEventListener("click", function () {
+        renderPage(currentPage - 1);
+        grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+      nav.appendChild(prevBtn);
+
+      // Page numbers
+      for (var p = 1; p <= totalPages; p++) {
+        (function (pageNum) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "shot-pagination__btn" + (pageNum === currentPage ? " is-active" : "");
+          btn.textContent = String(pageNum);
+          btn.setAttribute("aria-label", "Page " + pageNum);
+          if (pageNum === currentPage) {
+            btn.setAttribute("aria-current", "page");
+          }
+          btn.addEventListener("click", function () {
+            renderPage(pageNum);
+            grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          });
+          nav.appendChild(btn);
+        })(p);
+      }
+
+      // Next button
+      var nextBtn = document.createElement("button");
+      nextBtn.type = "button";
+      nextBtn.className = "shot-pagination__btn shot-pagination__btn--next";
+      nextBtn.innerHTML = "Next &rarr;";
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.setAttribute("aria-label", "Next page");
+      nextBtn.addEventListener("click", function () {
+        renderPage(currentPage + 1);
+        grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+      nav.appendChild(nextBtn);
+
+      // Counter info: "Showing 1–5 of 17"
+      var start = (currentPage - 1) * pageSize + 1;
+      var end = Math.min(currentPage * pageSize, items.length);
+      var info = document.createElement("span");
+      info.className = "shot-pagination__info";
+      info.textContent = "(" + start + "\u2013" + end + " of " + items.length + ")";
+      nav.appendChild(info);
+    }
+
+    renderPage(1);
+  })();
+
+  /* ---------------------------------------------------------------------
    * Math: load KaTeX only on pages that contain a formula, then render.
    * Content is stashed as escaped text in .math elements at build time.
    * ------------------------------------------------------------------- */

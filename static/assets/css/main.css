@@ -551,6 +551,58 @@ html:not(.js) .js-only { display: none !important; }
 .shot-item { padding: 0; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--bg-elev); aspect-ratio: 360 / 760; transition: border-color 0.2s, transform 0.2s; }
 .shot-item:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line-strong)); transform: translateY(-2px); }
 .shot-item img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.shot-item[hidden] { display: none !important; }
+
+/* Screenshot Gallery Pagination */
+.shot-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.shot-pagination[hidden] {
+  display: none !important;
+}
+.shot-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--glass);
+  color: var(--text);
+  font: 600 0.85rem/1 var(--font-mono);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.shot-pagination__btn:hover:not(:disabled) {
+  background: var(--glass-2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.shot-pagination__btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0d1c;
+  font-weight: 700;
+  pointer-events: none;
+}
+.shot-pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--line);
+}
+.shot-pagination__info {
+  font: 500 0.82rem/1 var(--font-mono);
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
 .no-shots {
   display: flex;
   align-items: center;

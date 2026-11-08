@@ -40,14 +40,22 @@
 {% if project.screenshots %}
 <section class="section section--tight" aria-labelledby="shots-h">
   <div class="container">
-    <h2 id="shots-h" class="sr-only">Screenshots</h2>
-    <div class="shot-grid">
+    <div class="section__head">
+      <div>
+        <h2 id="shots-h">Screenshots ({{ project.screenshots|length }})</h2>
+        <p class="section__sub">Click any screen to view in full resolution.</p>
+      </div>
+    </div>
+    <div class="shot-grid" data-paginate-grid data-page-size="5">
       {% for s in project.screenshots %}
-      <button class="shot-item" type="button" data-lightbox data-src="{{ root }}{{ s.src }}" data-caption="{{ s.alt }}">
+      <button class="shot-item" type="button" data-lightbox data-src="{{ root }}{{ s.src }}" data-caption="{{ s.alt }}"{% if loop.index > 5 %} hidden{% endif %}>
         <img src="{{ root }}{{ s.src }}" alt="{{ s.alt }}" loading="lazy" decoding="async">
       </button>
       {% endfor %}
     </div>
+    {% if project.screenshots|length > 5 %}
+    <nav class="shot-pagination" aria-label="Screenshot pagination" data-paginate-nav></nav>
+    {% endif %}
   </div>
 </section>
 {% else %}
