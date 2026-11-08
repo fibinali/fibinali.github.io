@@ -79,38 +79,38 @@
   screenshots:
     # Light Mode
     - src: assets/img/projects/aigosys/light-1.jpg
-      alt: Aigosys (Light Mode) - Overview 1
+      alt: Aigosys (Light Mode) - Course List Page
     - src: assets/img/projects/aigosys/light-2.jpg
-      alt: Aigosys (Light Mode) - Overview 2
+      alt: Aigosys (Light Mode) - Course Detail Page
     - src: assets/img/projects/aigosys/light-3.jpg
-      alt: Aigosys (Light Mode) - Course Modules
-    - src: assets/img/projects/aigosys/light-4.jpg
-      alt: Aigosys (Light Mode) - Study Material
+      alt: Aigosys (Light Mode) - My Learning List Page
     - src: assets/img/projects/aigosys/light-5.jpg
-      alt: Aigosys (Light Mode) - Interactive Quiz
+      alt: Aigosys (Light Mode) - Login Page
     - src: assets/img/projects/aigosys/light-6.jpg
-      alt: Aigosys (Light Mode) - Assessment Questions
+      alt: Aigosys (Light Mode) - OTP Verification Page
     - src: assets/img/projects/aigosys/light-7.jpg
-      alt: Aigosys (Light Mode) - Student Dashboard
+      alt: Aigosys (Light Mode) - Splash Screen
     - src: assets/img/projects/aigosys/light-8.jpg
-      alt: Aigosys (Light Mode) - Progress Analytics
+      alt: Aigosys (Light Mode) - Reading Page
     - src: assets/img/projects/aigosys/light-9.jpg
-      alt: Aigosys (Light Mode) - Profile & Settings
+      alt: Aigosys (Light Mode) - Quiz Page
     # Dark Mode
     - src: assets/img/projects/aigosys/dark-1.jpg
-      alt: Aigosys (Dark Mode) - Overview 1
+      alt: Aigosys (Dark Mode) - Quiz Page
     - src: assets/img/projects/aigosys/dark-2.jpg
-      alt: Aigosys (Dark Mode) - Overview 2
+      alt: Aigosys (Dark Mode) - My Learning
     - src: assets/img/projects/aigosys/dark-3.jpg
-      alt: Aigosys (Dark Mode) - Course Modules
+      alt: Aigosys (Dark Mode) - Profile
     - src: assets/img/projects/aigosys/dark-4.jpg
-      alt: Aigosys (Dark Mode) - Study Material
+      alt: Aigosys (Dark Mode) - Edit Profile
     - src: assets/img/projects/aigosys/dark-5.jpg
-      alt: Aigosys (Dark Mode) - Interactive Quiz
+      alt: Aigosys (Dark Mode) - Splash Screen
     - src: assets/img/projects/aigosys/dark-6.jpg
-      alt: Aigosys (Dark Mode) - Assessment Questions
+      alt: Aigosys (Dark Mode) - Login Page
     - src: assets/img/projects/aigosys/dark-7.jpg
-      alt: Aigosys (Dark Mode) - Student Dashboard
+      alt: Aigosys (Dark Mode) - Welcome Screen
     - src: assets/img/projects/aigosys/dark-8.jpg
-      alt: Aigosys (Dark Mode) - Progress Analytics
+      alt: Aigosys (Dark Mode) - OTP Verification
+    - src: assets/img/projects/aigosys/dark-9.jpg
+      alt: Aigosys (Dark Mode) - Course List Page
 
