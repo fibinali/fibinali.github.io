@@ -156,6 +156,13 @@
       });
       apply(btn.getAttribute("data-filter"));
     });
+
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-filter-reset]")) {
+        var allBtn = group.querySelector('[data-filter="all"]');
+        if (allBtn) allBtn.click();
+      }
+    });
   })();
 
   /* ---------------------------------------------------------------------
@@ -421,7 +428,23 @@
         .sort(function (a, b) { return b.s - a.s; })
         .slice(0, 20)
         .map(function (r) { return r.item; });
-      status.textContent = scored.length ? scored.length + " result" + (scored.length === 1 ? "" : "s") : "No results for \u201c" + q + "\u201d.";
+
+      if (!scored.length) {
+        status.textContent = "No matches found.";
+        results.innerHTML =
+          '<li class="search__empty-item" role="presentation">' +
+          '<div class="search__empty-card">' +
+          '<div class="search__empty-icon">' +
+          '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M9 11h4"/></svg>' +
+          '</div>' +
+          '<p class="search__empty-title">No results for \u201c' + escapeHtml(q) + '\u201d</p>' +
+          '<p class="search__empty-tip">Try searching for keywords like <strong>Flutter</strong>, <strong>BLoC</strong>, or <strong>Stripe</strong>.</p>' +
+          '</div></li>';
+        input.setAttribute("aria-activedescendant", "");
+        return;
+      }
+
+      status.textContent = scored.length + " result" + (scored.length === 1 ? "" : "s");
       render(scored, terms);
     }
 
