@@ -79,9 +79,10 @@
       <h2 class="card__title"><a href="{{ root }}projects/{{ p.slug }}/">{{ p.name }}</a></h2>
       <span class="status" data-status="{{ p.status|lower }}">{{ p.status }}</span>
     </div>
-    <p class="card__desc card__desc--full">{{ p.description }}</p>
+    <p class="card__desc">{{ p.description }}</p>
     <ul class="chips-static" aria-label="Technologies">
-      {% for t in p.tech %}<li>{{ t }}</li>{% endfor %}
+      {% for t in p.tech[:5] %}<li>{{ t }}</li>{% endfor %}
+      {% if p.tech|length > 5 %}<li class="chip--more">+{{ p.tech|length - 5 }}</li>{% endif %}
     </ul>
     <div class="project-card__links">
       <a class="link-btn" href="{{ root }}projects/{{ p.slug }}/">{{ icon('arrow', 15) }} Details</a>

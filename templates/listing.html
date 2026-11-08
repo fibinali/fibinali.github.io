@@ -28,13 +28,24 @@
 
 <section class="section section--tight section--last">
   <div class="container">
+    {% if posts %}
     <div class="grid" data-filter-list>
       {% for p in posts %}{{ card(p) }}{% endfor %}
     </div>
-    {% if not posts %}
-    {{ empty_state('No articles yet', 'Articles in this topic are being drafted.', icon_name=(topic.icon if topic else 'inbox'), action_label='Browse all articles', action_url=root ~ 'articles/') }}
-    {% endif %}
+    {% if filters|length > 1 %}
     {{ empty_state('No matching articles', 'Try selecting a different filter above.', icon_name='search', action_label='Reset filter', action_attrs='data-filter-reset', attrs='data-filter-empty hidden') }}
+    {% endif %}
+    {% else %}
+      {% if is_tag %}
+      {{ empty_state('No articles found', 'No articles have been tagged with this topic yet.', icon_name='tag', action_label='View all tags', action_url=root ~ 'tags/') }}
+      {% elif topic %}
+      {{ empty_state('No articles yet', 'Articles in this topic are being drafted.', icon_name=topic.icon, action_label='Explore projects', action_url=root ~ 'projects/') }}
+      {% elif nav_active == 'tutorials' %}
+      {{ empty_state('No tutorials published yet', 'Step-by-step tutorials and practical guides will be published here soon.', icon_name='terminal', action_label='Explore projects', action_url=root ~ 'projects/') }}
+      {% else %}
+      {{ empty_state('No articles published yet', 'Technical write-ups and articles are currently being drafted.', icon_name='inbox', action_label='Explore projects', action_url=root ~ 'projects/') }}
+      {% endif %}
+    {% endif %}
   </div>
 </section>
 {% endblock %}

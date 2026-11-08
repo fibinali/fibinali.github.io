@@ -7,7 +7,7 @@
     {{ breadcrumb([('Home', ''), ('Projects', 'projects/')]) }}
     <h1>Projects</h1>
     <p class="page-head__lead">Tools, labs and experiments. Most started as a tutorial I wanted to exist, and a few grew into something useful.</p>
-    {% if projects %}
+    {% if projects and project_filters|length > 0 %}
     <div class="chips js-only" role="group" aria-label="Filter projects" data-filter-group>
       <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All <span class="chip__n">{{ projects|length }}</span></button>
       {% for f in project_filters %}

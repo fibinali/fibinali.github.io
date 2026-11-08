@@ -795,7 +795,7 @@ def main():
         nav=[
             ("home", "Home", ""), ("ai", "AI", "topics/ai/"),
             ("cybersecurity", "Cybersecurity", "topics/cybersecurity/"),
-            ("programming", "Programming", "topics/programming/"),
+            ("tutorials", "Tutorials", "tutorials/"),
             ("projects", "Projects", "projects/"),
             ("about", "About", "about/"),
         ],
@@ -828,7 +828,7 @@ def main():
 
     # ── home
     featured = [p for p in posts if p.featured][:3]
-    if len(featured) < 3:
+    if len(featured) < 3 and len(posts) > 3:
         featured += [p for p in posts if p not in featured][: 3 - len(featured)]
     latest = [p for p in posts if p not in featured][:6]
     feat_project = next((x for x in projects if x.get("featured")), projects[0] if projects else None)
@@ -858,7 +858,15 @@ def main():
                 heading=t["name"], topic=t, page_title=f"{t['name']} articles | {cfg['name']}",
                 page_description=t["description"], intro=t["description"], posts=t["posts"],
                 filters=[c for c in t["category_counts"] if c["count"]],
-                nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity", "programming") else "")
+                nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity") else "")
+
+    tut = [p for p in posts if p.type == "tutorial"]
+    listing("tutorials/index.html", crumbs=[("Tutorials", "tutorials/")], heading="Tutorials",
+            page_title=f"Tutorials | {cfg['name']}",
+            page_description="Step-by-step, reproducible tutorials on AI, security and programming.",
+            intro="Step-by-step guides you can follow on a laptop. Each one lists prerequisites and ends with something that runs.",
+            posts=tut, filters=[{"name": c, "slug": slugify(c), "count": sum(1 for p in tut if p.category == c)}
+                                for c in dict.fromkeys(p.category for p in tut)], nav_active="tutorials")
 
     render("tags.html", "tags/index.html", tags=tag_list, posts_total=len(posts), page_title=f"Tags | {cfg['name']}",
            page_description="Browse every topic tag used on the blog.",
@@ -871,7 +879,7 @@ def main():
 
     # ── projects / about / 404
     pf = [("ai", "AI"), ("cybersecurity", "Cybersecurity"), ("flutter", "Flutter"), ("backend", "Backend"), ("web", "Web")]
-    project_filters = [{"slug": s, "name": n, "count": sum(1 for x in projects if s in x["filters"])} for s, n in pf]
+    project_filters = [f for f in [{"slug": s, "name": n, "count": sum(1 for x in projects if s in x["filters"])} for s, n in pf] if f["count"] > 0]
     render("projects.html", "projects/index.html", projects=projects, project_filters=project_filters, nav_active="projects",
            page_title=f"Projects | {cfg['name']}",
            page_description="Open-source projects, experiments and security labs.",

@@ -1,110 +1,131 @@
-## Overview
+## Project Overview
 
-**Aigosys** is an enterprise learning and education mobile application built for students. Developed as an official company project, it provides an end-to-end digital learning environment featuring modular courses, multimedia study material, interactive timed assessments, and real-time student progress tracking.
+**Aigosys** is a feature-rich, cross-platform mobile application tailored for modern e-learning. Built with **Flutter**, the application boasts a strictly decoupled Clean Architecture, predictable BLoC state management, and seamless media playback integrations, delivering a responsive and reliable educational experience to students.
 
-As the Flutter mobile frontend developer on the team, my primary role was translating product requirements into a responsive, high-performance mobile client that interfaces seamlessly with a high-concurrency Go (Golang) backend. Phase 1 of the application has been successfully completed, and active feature development is currently ongoing.
+As the mobile frontend developer on the team, my responsibility was engineering the client-side architecture, implementing the multi-format curriculum engine (video, articles, timed quizzes), configuring resilient networking against a Go (Golang) REST backend, and ensuring pixel-perfect responsiveness across diverse Android and iOS devices.
 
 ---
 
-## Architecture: Enterprise-Scale BLoC
+## Architecture: The Clean Architecture Approach
 
-Building an educational platform requires managing interconnected states: active course progress, quiz timers, video playback timestamps, and notification payload routing. To ensure high maintainability and testability across features, I structured the application using feature-first Clean Architecture with **BLoC (Business Logic Component)**:
+To ensure maintainability, scalability, and independent testability across a rapidly expanding feature set, the application strictly adheres to **Clean Architecture** principles. The directory structure is divided into three distinct layers with unidirectional dependencies:
 
 ```text
-Student Interaction ─────► Event (e.g. SubmitAnswerEvent)
-                                 │
-                                 ▼
-                         QuizBloc (Handler)
-                                 │
-                ┌────────────────┴────────────────┐
-                ▼                                 ▼
-      Emit State (QuizSubmitting)         Go Backend API Call
-                │                                 │
-                ▼                                 ▼
-      Emit State (QuizCompleted)    ◄─── HTTP 200 (Score & Review)
+┌─────────────────────────────────────────────────────────────┐
+│                     PRESENTATION LAYER                      │
+│      screens/ · widgets/ · bloc/ (flutter_bloc)             │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ depends on
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                        DOMAIN LAYER                         │
+│  usecases/ · entities/ · repository/ (abstract contracts)   │
+│                 (Pure Dart — Zero UI Framework)             │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ implemented by
+                               │
+┌─────────────────────────────────────────────────────────────┐
+│                         DATA LAYER                          │
+│  api_client.dart · dio_client.dart · model/ · data_source/  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Modular Feature Slices
+### 1. Data Layer (`data/`)
+Handles all communication with external APIs, persistent device storage, and serialization:
+* **`dio_client.dart` & `api_client.dart`**: Centralized HTTP client configured with cookie jars, token refresh interceptors, and error sanitization.
+* **`model/`**: JSON-to-Dart Data Transfer Objects (DTOs) with serialization and mapping methods to domain entities.
+* **`data_source/`**: Concrete implementations for both remote endpoints (REST API) and local cached data (`get_storage`).
+* **`repositories/`**: Implements the abstract repository interfaces defined in the domain layer.
 
-The app is broken down into autonomous feature modules:
+### 2. Domain Layer (`domain/`)
+The foundational business core of the application, completely isolated from Flutter UI dependencies or third-party data packages:
+* **`usecases/`**: Encapsulates single-responsibility business workflows (e.g., `login_use_case.dart`, `get_course_detail_use_case.dart`, `submit_quiz_use_case.dart`).
+* **`entities/`**: Clean, immutable domain models representing business objects.
+* **`repository/`**: Abstract interfaces defining the contract for data operations without dictating how the data is fetched.
 
-- **`features/auth`**: JWT session management, secure storage, and token refresh interceptors.
-- **`features/courses`**: Course discovery, syllabus tree traversal, and content playback.
-- **`features/quizzes`**: Interactive question renderers, countdown timers, and answer aggregation.
-- **`features/progress`**: Student analytics, completed milestone sync, and streak counters.
-- **`features/notifications`**: Firebase FCM token registration and deep link payload parsing.
-
----
-
-## Interfacing with a Go Backend
-
-Working on a company team alongside backend engineers writing Go offered unique opportunities and challenges compared to solo indie development:
-
-### 1. Contract-First API Integration
-Before writing UI code, we established strict OpenAPI/Swagger schemas. Go’s strong typing meant backend responses were predictable, but required rigorous Dart model serialization. Using code-generated `freezed` and `json_serializable` classes ensured that any schema discrepancies between the Go structs and Dart DTOs were caught early.
-
-### 2. Resilient Error Handling
-Go microservices return structured machine-readable error codes. I built a centralized HTTP interceptor layer that maps backend error envelopes directly into localized user-facing failure states:
-
-```dart
-class ApiException implements Exception {
-  final String code;
-  final String message;
-  final int statusCode;
-
-  ApiException({required this.code, required this.message, required this.statusCode});
-
-  factory ApiException.fromJson(Map<String, dynamic> json, int statusCode) {
-    return ApiException(
-      code: json['code'] ?? 'UNKNOWN_ERROR',
-      message: json['message'] ?? 'An unexpected error occurred.',
-      statusCode: statusCode,
-    );
-  }
-}
-```
+### 3. Presentation Layer (`presentation/`)
+Controls what the user sees and handles UI state transitions:
+* **`screens/`**: High-level page widgets structured feature-by-feature (Auth, Courses, Quizzes, Profile, My Learning).
+* **`widgets/`**: Reusable UI components (shimmer skeletons, custom progress indicators, animated buttons).
+* **`bloc/`**: `flutter_bloc` state containers that map incoming user actions to immutable states.
 
 ---
 
-## Key Implementations
+## Tech Stack & State Management Strategy
 
-### 1. Interactive Assessment & Quiz Engine
+The technology stack was chosen to balance performance, code predictability, and rich user feedback:
 
-The quiz engine is one of the most critical parts of the student experience:
-
-- **Timer State Machine**: Quizzes run on strict countdowns. The timer runs independently within a Dart stream, maintaining accuracy even if the student temporarily receives an incoming phone call.
-- **Local Answer Persistence**: Answers are saved to local SQLite/Hive storage on every selection. If the network drops or the app restarts, students don't lose their progress.
-- **Question Variety**: Modular widget builders support multiple choice, multi-select, boolean, and short answer inputs with smooth page-curl transitions between questions.
-
-### 2. Student Progress & Analytics
-
-To keep students motivated, Aigosys features visual progress tracking:
-
-- Animated custom circular progress gauges displaying course completion percentages.
-- Weekly study activity heatmaps and quiz score trajectory charts.
-- Optimistic UI updates when marking lessons as complete, synchronized in the background with the Go backend.
-
-### 3. Firebase Cloud Messaging & Deep Links
-
-Keeping students engaged requires timely notifications:
-
-- **Firebase Notifications (FCM)**: Configured background and foreground notification handlers for quiz reminders, new module releases, and company announcements.
-- **Deep Link Routing**: Integrated custom deep links (`aigosys://course/{id}` and `aigosys://quiz/{id}`) with Flutter navigation, routing students directly to the target learning screen upon tapping a notification.
-
-### 4. Custom Widgets & Responsive Layouts
-
-Students use a wide variety of devices, from compact entry-level smartphones to large tablets:
-
-- Custom responsive layout builders adapting between single-column phone view and dual-pane tablet view for course modules.
-- Smooth micro-animations using Flutter's `AnimationController` and implicit animations for test completion confetti and score counters.
+| Category | Technology | Purpose & Implementation |
+|---|---|---|
+| **Core SDK** | Flutter (Dart ^3.12.2) | Cross-platform framework targeting high frame rates and uniform rendering |
+| **Primary State** | `flutter_bloc` | Predictable, event-driven state handling across Home, Profile, Course Details, and My Learning |
+| **Auxiliary State** | `provider` & `get` | Lightweight scoped dependencies: `provider` drives dynamic localization; Get utilities support context-free navigation |
+| **Networking** | `dio`, `dio_cookie_manager`, `cookie_jar` | Robust HTTP requests, cookie session persistence, and global authentication interceptors |
+| **Local Storage** | `get_storage` | High-speed key-value persistence for tokens, active theme modes, and session caching |
+| **Routing** | `no_context_navigation` + `page_transition` | Decoupled navigation service allowing route pushes from background services with smooth transitions |
+| **Responsiveness** | `flutter_screenutil` | Dynamic adaptation ensuring fonts, margins, and card widths scale across varying phone aspect ratios |
+| **Media Streaming** | Cloudflare Stream SDK | Secure, adaptive-bitrate video delivery optimized for mobile bandwidth constraints |
 
 ---
 
-## Real-World Lessons from a Production Company Project
+## Core Modules & Engineering Features
 
-1. **Defensive Parsing is Mandatory**: In production, backend data can sometimes contain unexpected nulls or partial payloads during deployments. Adding strict fallback defaults prevented production crashes.
-2. **State Isolation Prevents Leaks**: Separating transient UI state (like scroll positions and form text controllers) from business domain state (enrolled courses and quiz submissions) keeps BLoCs lightweight and easy to test.
-3. **Communication Across Teams**: The biggest speed boost didn't come from writing code faster, but from agreeing on API payloads, pagination parameters, and status codes with the backend team before starting frontend implementation.
+### 1. 🔐 Authentication & Session Engine
+The authentication flow (`auth_wrapper.dart`) provides a secure, friction-free onboarding experience:
+* **Multi-Step Verification**: Clean transition pipeline between Phone/Email Login, Signup, and dedicated **OTP Verification**.
+* **Session Lifecycle**: Automatic token verification on launch with `auth_wrapper.dart` determining whether to route the student to the main dashboard or the login screen.
+* **Cookie-Based Sessions**: Leverages `dio_cookie_manager` and persistent `cookie_jar` to maintain authenticated states seamlessly across app restarts.
 
-Aigosys has been a rewarding real-world project demonstrating how clean architecture, robust state management, and clear cross-team communication lead to high-quality mobile software.
+### 2. 🏠 Course Discovery & Home Dashboard
+The primary landing experience presents active and catalog courses with zero perceived latency:
+* **Skeleton Shimmer**: Implemented `course_card_shimmer.dart` to show smooth placeholder animations while asynchronous course lists load.
+* **Categorized Browsing**: Dynamic course filtering by topics, tags, and enrollment status.
 
+### 3. 📚 Course Consumption Engine
+The core value proposition of Aigosys is delivering structured educational content across multiple media types:
+* **Cloudflare Stream Integration (`cloudflare_stream_player.dart`)**: Secure video streaming with adaptive bitrate streaming (HLS), custom playback controls, and orientation handling.
+* **Article Reader (`article_reader_screen.dart`)**: Formatted technical reading view with customizable font scaling and distraction-free scrolling.
+* **Interactive Assessment Engine (`quiz_screen.dart`)**: Timed quizzes supporting multiple question formats, instant client-side answer validation, and detailed score breakdown reviews.
+* **Student Reviews**: Interactive bottom sheets allowing students to submit course feedback and ratings directly to the backend.
+
+### 4. 📈 My Learning & Progress Tracking
+A dedicated portal tracking user enrollment and lecture completion:
+* Powered by `enrollment_progress_model.dart`, tracking exact video timestamps, completed modules, and remaining quiz requirements.
+* Real-time synchronization with the Go backend so students can resume learning exactly where they left off on any device.
+
+### 5. 👤 Profile & Student Account Management
+Allows students to manage personal info, contact details, educational qualification, and account preferences:
+* Integrated `image_picker` for seamless profile picture selection and multipart upload.
+* Direct editing and validation for address, contact numbers, and credentials.
+
+---
+
+## UI/UX, Micro-Interactions & Resilience
+
+### Theming & Typography
+* **Typography**: Clean, readable sans-serif typography powered by `google_fonts`.
+* **Centralized Design System**: Comprehensive `theme.dart` managing both **Light Mode** and **Dark Mode** color tokens, high-contrast borders, and surface elevations.
+
+### Feedback & Motion
+* **Micro-Interactions**: Enhanced with `lottie` animations and Flutter's `animations` package for delightful transitions on quiz completions and milestone unlocks.
+* **Feedback Delivery**: Custom toast notifications and loading overlays using `cherry_toast` and `flutter_easyloading` for unobtrusive user alerts.
+
+### Network Resilience (`presentation/network_fails/`)
+Real-world mobile connections are unstable. Rather than allowing raw exception screens or infinite spinners, Aigosys incorporates dedicated fallback screens:
+* **No Internet Screen**: Automatically intercepts network drops, prompting the user with a retry button once connectivity is restored.
+* **500 Server Error Screen**: Gracefully catches backend outages, explaining the situation clearly and guiding the student safely back to the home view.
+
+---
+
+## Advanced Integrations: Push Notifications & Deep Linking
+
+* **Firebase Cloud Messaging**: Integrated `firebase_core`, `firebase_messaging`, and `flutter_local_notifications` for scheduled study reminders, quiz deadlines, and announcement blasts.
+* **Deep Linking (`global_deep_link_handler.dart`)**: Leveraged `app_links` to enable universal web-to-app routing. Tapping an email or web link directly opens the exact course or quiz screen inside the app.
+
+---
+
+## Key Takeaways from Production
+
+1. **Clean Architecture Pays Dividends Early**: Separating `data`, `domain`, and `presentation` made it straightforward to swap out storage solutions and introduce Cloudflare Stream without breaking existing UI widgets.
+2. **Defensive Network Modeling**: Coupling `dio` interceptors with custom error wrappers ensured that every Go backend error code mapped predictably to human-readable UI toasts.
+3. **Optimized for Real Mobile Devices**: Combining `flutter_screenutil` with dedicated Light and Dark mode palettes delivered a native, polished look on screens of all sizes.

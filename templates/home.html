@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "macros.html" import card, featured_card, avatar with context %}
+{% from "macros.html" import card, featured_card, avatar, empty_state with context %}
 
 {% block content %}
 {# ───────── Hero ───────── #}
@@ -82,11 +82,17 @@
         <h2 id="latest-h">Latest articles</h2>
         <p class="section__sub">Recent project write-ups and engineering notes.</p>
       </div>
+      {% if posts|length > 0 %}
       <a class="text-link" href="{{ root }}articles/">Browse all {{ posts|length }}</a>
+      {% endif %}
     </div>
+    {% if latest %}
     <div class="grid">
       {% for p in latest %}{{ card(p) }}{% endfor %}
     </div>
+    {% else %}
+    {{ empty_state('No articles published yet', 'New articles, tutorials, and engineering write-ups will appear here soon.', icon_name='inbox', action_label='Explore projects', action_url=root ~ 'projects/') }}
+    {% endif %}
   </div>
 </section>
 

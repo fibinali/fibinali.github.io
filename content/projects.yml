@@ -24,14 +24,17 @@
 # It renders below the gallery on the detail page automatically if present.
 
 - name: Stavoya
-  tagline: A mobile hotel booking and e-commerce application engineered with Flutter, BLoC state management, and Stripe checkout.
-  description: Solo Flutter frontend development for a hotel booking app featuring real-time room discovery, custom calendar date selection, guest counters, BLoC state handling, and secure Stripe payment integration.
+  tagline: A comprehensive PropTech mobile rental and hotel booking platform engineered with Flutter, Clean Architecture, BLoC, and Stripe.
+  description: Modern PropTech mobile rental application built with Flutter strictly following Clean Architecture principles (domain, data, presentation). Features BLoC state management, Google Maps discovery, Stripe payments, dynamic pricing calculations, stay extensions, and deep linking.
   tech:
     - Flutter
     - Dart
+    - Clean Architecture
     - BLoC
     - Stripe
+    - Google Maps
     - REST API
+    - Firebase
   filters:
     - flutter
   status: Completed
@@ -40,23 +43,26 @@
   featured: true
   preview:
     - "$ stavoya --inspect-architecture"
-    - "Flutter 3.x (Dart) · State: BLoC pattern"
-    - "Payments: Stripe SDK · Auth: JWT session management"
-    - "Features: Interactive calendar, filters, booking pipeline, deep links"
+    - "Flutter 3.x (Dart ^3.12.2) · Clean Architecture (Domain, Data, Presentation)"
+    - "State: BLoC (flutter_bloc) · DI: Hybrid GetIt + GetX"
+    - "Features: Dynamic pricing, Google Maps, Stripe Checkout, Deep Links"
   highlights:
-    - "End-to-end hotel booking cycle: date-range picking, guest allocation, room selection, and instant summary"
-    - "BLoC architecture for predictable state management across multi-step reservation flows"
-    - "In-app Stripe mobile SDK payment sheet integration with payment intent validation"
-    - "Custom interactive UI: animated date-picker calendar, modal bottom sheets, and hero image gallery"
-    - "Push notifications and deep linking support for reservation confirmations and reminders"
+    - "Strict Clean Architecture structure across 30+ domain use cases, entities, and repository contracts"
+    - "Hybrid dependency injection using GetIt for UI BLoCs and GetX for lazy-loading domain use cases"
+    - "Full PropTech booking engine with dynamic pricing calculations, wishlists, and stay extensions"
+    - "In-app Stripe mobile SDK integration with payment sheet checkout and digital invoice generation"
+    - "Interactive Google Maps property discovery, Firebase push notifications, and global deep linking"
 
 - name: Aigosys
-  tagline: A student-centric mobile education platform built with Flutter, BLoC architecture, and a Go backend.
-  description: Company mobile learning application built in Flutter with BLoC state management and Firebase, interfacing with a Go backend. Features structured course modules, interactive timed quizzes, student progress analytics, and deep linking.
+  tagline: A student-centric mobile education platform built with Flutter, Clean Architecture, BLoC, and Cloudflare Stream.
+  description: Company cross-platform mobile learning application built with Flutter adhering to Clean Architecture principles (data, domain, presentation). Features BLoC state management, secure Cloudflare Stream video delivery, interactive timed quizzes, Firebase push notifications, and resilient Dio networking.
   tech:
     - Flutter
     - Dart
+    - Clean Architecture
     - BLoC
+    - Cloudflare Stream
+    - Dio
     - Firebase
     - Go REST API
   filters:
@@ -66,16 +72,17 @@
   demo: ""
   featured: false
   preview:
-    - "$ aigosys --status"
-    - "Flutter 3.x (Dart) · State: BLoC pattern"
-    - "Backend: Go REST API · Cloud: Firebase FCM"
-    - "Phase 1: Completed · Development: Active"
+    - "$ aigosys --architecture"
+    - "Flutter 3.x (Dart ^3.12.2) · Clean Architecture"
+    - "State: BLoC · Video: Cloudflare Stream"
+    - "Network: Dio + CookieJar · Cloud: Firebase FCM"
   highlights:
-    - "Structured modular course delivery with interactive lessons, video streaming, and study resources"
-    - "Interactive timed quiz and assessment engine with instantaneous score calculation and review modes"
+    - "Strict Clean Architecture layer separation: data (Dio, models), domain (pure Dart usecases), and presentation (BLoC)"
+    - "Optimized video streaming engine powered by Cloudflare Stream with custom mobile player controls"
+    - "Multi-format curriculum engine: Article Reader, interactive timed quizzes, and course review sheets"
     - "Real-time student progress tracking and learning analytics synchronized with a Go backend"
-    - "Firebase Cloud Messaging (FCM) integration for assignment reminders, exam alerts, and announcements"
-    - "Deep linking navigation allowing students to open specific courses and quizzes directly from push notifications"
+    - "Full Firebase push notifications (FCM) and deep linking via app_links for seamless web-to-app routing"
+    - "Production network resilience with dedicated fallback screens for 500 server errors and offline states"
   screenshots:
     # Light Mode
     - src: assets/img/projects/aigosys/light-1.jpg

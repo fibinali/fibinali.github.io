@@ -263,6 +263,21 @@
       );
       prose.querySelectorAll("h2[id], h3[id]").forEach(function (h) { headingIO.observe(h); });
     }
+
+    // TOC subheadings toggle buttons
+    document.querySelectorAll(".toc-item__btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var item = btn.closest(".toc-item");
+        if (!item) return;
+        var sub = item.querySelector(".toc-item__sub");
+        if (!sub) return;
+        var isOpen = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!isOpen));
+        sub.hidden = isOpen;
+      });
+    });
   })();
 
   /* ---------------------------------------------------------------------
@@ -526,7 +541,7 @@
       q = q.trim();
       if (!q) {
         results.innerHTML = "";
-        status.textContent = index ? "Type to search " + index.length + " articles." : "";
+        status.textContent = (index && index.length) ? "Type to search " + index.length + " articles." : (index ? "No articles indexed yet." : "");
         input.setAttribute("aria-activedescendant", "");
         return;
       }

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% from "macros.html" import breadcrumb with context %}
+{% from "macros.html" import breadcrumb, empty_state with context %}
 
 {% block content %}
 <section class="page-head">
   <div class="container">
     {{ breadcrumb([('Home', ''), ('Tags', 'tags/')]) }}
     <h1>Tags</h1>
-    <p class="page-head__lead">{{ tags|length }} tags across {{ posts_total if posts_total else 'all' }} articles. Larger tags have more articles.</p>
+    <p class="page-head__lead">{% if tags %}{{ tags|length }} tags across {{ posts_total if posts_total else 'all' }} articles. Larger tags have more articles.{% else %}Browse topic tags across published articles.{% endif %}</p>
   </div>
 </section>
 <section class="section section--tight section--last">
   <div class="container">
+    {% if tags %}
     <ul class="tag-cloud">
       {% for t in tags %}
       <li>
@@ -20,6 +21,9 @@
       </li>
       {% endfor %}
     </ul>
+    {% else %}
+    {{ empty_state('No tags yet', 'Tags will appear here once articles are published.', icon_name='tag', action_label='Explore projects', action_url=root ~ 'projects/') }}
+    {% endif %}
   </div>
 </section>
 {% endblock %}
