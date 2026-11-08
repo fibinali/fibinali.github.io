@@ -1,5 +1,18 @@
 <dialog class="lightbox" id="lightbox-dialog" aria-label="Screenshot preview">
-  <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close preview">{{ icon('close', 20) }}</button>
-  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox__top">
+    <span class="lightbox__counter" id="lightbox-counter"></span>
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close preview">{{ icon('close', 20) }}</button>
+  </div>
+  <div class="lightbox__stage">
+    <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous image">
+      {{ icon('chevron', 22) }}
+    </button>
+    <div class="lightbox__img-wrap">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next image">
+      {{ icon('chevron', 22) }}
+    </button>
+  </div>
   <p class="lightbox__caption" id="lightbox-caption"></p>
 </dialog>

@@ -272,29 +272,94 @@
     var dialog = document.getElementById("lightbox-dialog");
     var img = document.getElementById("lightbox-img");
     var caption = document.getElementById("lightbox-caption");
+    var counter = document.getElementById("lightbox-counter");
+    var prevBtn = document.querySelector("[data-lightbox-prev]");
+    var nextBtn = document.querySelector("[data-lightbox-next]");
     if (!dialog || !img) return;
 
-    function open(src, cap) {
-      img.src = src;
-      img.alt = cap || "";
-      caption.textContent = cap || "";
-      caption.hidden = !cap;
+    var gallery = [];
+    var currentIndex = -1;
+
+    function update() {
+      if (currentIndex < 0 || currentIndex >= gallery.length) return;
+      var item = gallery[currentIndex];
+      img.src = item.src;
+      img.alt = item.caption || "";
+      caption.textContent = item.caption || "";
+      caption.hidden = !item.caption;
+
+      if (counter) {
+        counter.textContent = gallery.length > 1 ? (currentIndex + 1) + " / " + gallery.length : "";
+      }
+      if (prevBtn) {
+        prevBtn.style.visibility = gallery.length > 1 ? "visible" : "hidden";
+      }
+      if (nextBtn) {
+        nextBtn.style.visibility = gallery.length > 1 ? "visible" : "hidden";
+      }
+    }
+
+    function open(index) {
+      gallery = Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]")).map(function (el) {
+        return {
+          src: el.getAttribute("data-src"),
+          caption: el.getAttribute("data-caption")
+        };
+      });
+      if (!gallery.length) return;
+      currentIndex = (index + gallery.length) % gallery.length;
+      update();
       if (typeof dialog.showModal === "function") dialog.showModal();
       else dialog.setAttribute("open", "");
     }
+
     function close() {
       if (typeof dialog.close === "function" && dialog.open) dialog.close();
       else dialog.removeAttribute("open");
+      currentIndex = -1;
+      img.src = "";
+    }
+
+    function prev() {
+      if (gallery.length <= 1) return;
+      currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+      update();
+    }
+
+    function next() {
+      if (gallery.length <= 1) return;
+      currentIndex = (currentIndex + 1) % gallery.length;
+      update();
     }
 
     document.addEventListener("click", function (e) {
       var btn = e.target.closest("[data-lightbox]");
-      if (btn) { open(btn.getAttribute("data-src"), btn.getAttribute("data-caption")); return; }
+      if (btn) {
+        var allBtns = Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]"));
+        var idx = allBtns.indexOf(btn);
+        open(idx >= 0 ? idx : 0);
+        return;
+      }
       if (e.target.closest("[data-lightbox-close]")) close();
+      if (e.target.closest("[data-lightbox-prev]")) { e.stopPropagation(); prev(); }
+      if (e.target.closest("[data-lightbox-next]")) { e.stopPropagation(); next(); }
       if (e.target === dialog) close();
     });
+
+    // Keyboard navigation: ArrowLeft, ArrowRight
+    document.addEventListener("keydown", function (e) {
+      if (!dialog.open) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next();
+      }
+    });
+
     dialog.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
-    dialog.addEventListener("close", function () { img.src = ""; });
+    dialog.addEventListener("close", function () { close(); });
   })();
 
   /* ---------------------------------------------------------------------
