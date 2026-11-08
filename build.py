@@ -795,7 +795,8 @@ def main():
         nav=[
             ("home", "Home", ""), ("ai", "AI", "topics/ai/"),
             ("cybersecurity", "Cybersecurity", "topics/cybersecurity/"),
-            ("tutorials", "Tutorials", "tutorials/"), ("projects", "Projects", "projects/"),
+            ("programming", "Programming", "topics/programming/"),
+            ("projects", "Projects", "projects/"),
             ("about", "About", "about/"),
         ],
     )
@@ -857,14 +858,7 @@ def main():
                 heading=t["name"], topic=t, page_title=f"{t['name']} articles | {cfg['name']}",
                 page_description=t["description"], intro=t["description"], posts=t["posts"],
                 filters=[c for c in t["category_counts"] if c["count"]],
-                nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity") else "")
-    tut = [p for p in posts if p.type == "tutorial"]
-    listing("tutorials/index.html", crumbs=[("Tutorials", "tutorials/")], heading="Tutorials",
-            page_title=f"Tutorials | {cfg['name']}",
-            page_description="Step-by-step, reproducible tutorials on AI, security and programming.",
-            intro="Step-by-step guides you can follow on a laptop. Each one lists prerequisites and ends with something that runs.",
-            posts=tut, filters=[{"name": c, "slug": slugify(c), "count": sum(1 for p in tut if p.category == c)}
-                                for c in dict.fromkeys(p.category for p in tut)], nav_active="tutorials")
+                nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity", "programming") else "")
 
     render("tags.html", "tags/index.html", tags=tag_list, posts_total=len(posts), page_title=f"Tags | {cfg['name']}",
            page_description="Browse every topic tag used on the blog.",
