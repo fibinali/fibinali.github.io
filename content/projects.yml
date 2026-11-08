@@ -77,12 +77,40 @@
     - "Firebase Cloud Messaging (FCM) integration for assignment reminders, exam alerts, and announcements"
     - "Deep linking navigation allowing students to open specific courses and quizzes directly from push notifications"
   screenshots:
-    - src: assets/img/projects/aigosys/1.jpg
-      alt: Aigosys student dashboard and enrolled course catalog
-    - src: assets/img/projects/aigosys/2.jpg
-      alt: Interactive timed quiz and assessment screen
-    - src: assets/img/projects/aigosys/3.jpg
-      alt: Student learning progress and performance analytics
-    - src: assets/img/projects/aigosys/4.jpg
-      alt: Course module viewer and study materials
+    # Light Mode
+    - src: assets/img/projects/aigosys/light-1.jpg
+      alt: Aigosys (Light Mode) - Overview 1
+    - src: assets/img/projects/aigosys/light-2.jpg
+      alt: Aigosys (Light Mode) - Overview 2
+    - src: assets/img/projects/aigosys/light-3.jpg
+      alt: Aigosys (Light Mode) - Course Modules
+    - src: assets/img/projects/aigosys/light-4.jpg
+      alt: Aigosys (Light Mode) - Study Material
+    - src: assets/img/projects/aigosys/light-5.jpg
+      alt: Aigosys (Light Mode) - Interactive Quiz
+    - src: assets/img/projects/aigosys/light-6.jpg
+      alt: Aigosys (Light Mode) - Assessment Questions
+    - src: assets/img/projects/aigosys/light-7.jpg
+      alt: Aigosys (Light Mode) - Student Dashboard
+    - src: assets/img/projects/aigosys/light-8.jpg
+      alt: Aigosys (Light Mode) - Progress Analytics
+    - src: assets/img/projects/aigosys/light-9.jpg
+      alt: Aigosys (Light Mode) - Profile & Settings
+    # Dark Mode
+    - src: assets/img/projects/aigosys/dark-1.jpg
+      alt: Aigosys (Dark Mode) - Overview 1
+    - src: assets/img/projects/aigosys/dark-2.jpg
+      alt: Aigosys (Dark Mode) - Overview 2
+    - src: assets/img/projects/aigosys/dark-3.jpg
+      alt: Aigosys (Dark Mode) - Course Modules
+    - src: assets/img/projects/aigosys/dark-4.jpg
+      alt: Aigosys (Dark Mode) - Study Material
+    - src: assets/img/projects/aigosys/dark-5.jpg
+      alt: Aigosys (Dark Mode) - Interactive Quiz
+    - src: assets/img/projects/aigosys/dark-6.jpg
+      alt: Aigosys (Dark Mode) - Assessment Questions
+    - src: assets/img/projects/aigosys/dark-7.jpg
+      alt: Aigosys (Dark Mode) - Student Dashboard
+    - src: assets/img/projects/aigosys/dark-8.jpg
+      alt: Aigosys (Dark Mode) - Progress Analytics
 
