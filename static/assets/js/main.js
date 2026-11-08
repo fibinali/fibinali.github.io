@@ -363,17 +363,22 @@
   })();
 
   /* ---------------------------------------------------------------------
-   * Screenshot Gallery Pagination (5 per page)
+   * Screenshot Slider (5 per page with Left & Right side arrows)
    * ------------------------------------------------------------------- */
-  (function paginationModule() {
-    var grid = document.querySelector("[data-paginate-grid]");
-    var nav = document.querySelector("[data-paginate-nav]");
-    if (!grid || !nav) return;
+  (function shotSliderModule() {
+    var slider = document.querySelector("[data-shot-slider]");
+    if (!slider) return;
 
-    var pageSize = parseInt(grid.getAttribute("data-page-size") || "5", 10);
+    var prevBtn = slider.querySelector("[data-shot-prev]");
+    var nextBtn = slider.querySelector("[data-shot-next]");
+    var grid = slider.querySelector("[data-paginate-grid]");
+    if (!grid || !prevBtn || !nextBtn) return;
+
+    var pageSize = parseInt(slider.getAttribute("data-page-size") || "5", 10);
     var items = Array.prototype.slice.call(grid.querySelectorAll(".shot-item"));
     if (items.length <= pageSize) {
-      nav.hidden = true;
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
       return;
     }
 
@@ -389,65 +394,21 @@
         item.hidden = idx < start || idx >= end;
       });
 
-      renderControls();
-    }
-
-    function renderControls() {
-      nav.innerHTML = "";
-
-      // Prev button
-      var prevBtn = document.createElement("button");
-      prevBtn.type = "button";
-      prevBtn.className = "shot-pagination__btn shot-pagination__btn--prev";
-      prevBtn.innerHTML = "&larr; Prev";
       prevBtn.disabled = currentPage === 1;
-      prevBtn.setAttribute("aria-label", "Previous page");
-      prevBtn.addEventListener("click", function () {
-        renderPage(currentPage - 1);
-        grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
-      nav.appendChild(prevBtn);
-
-      // Page numbers
-      for (var p = 1; p <= totalPages; p++) {
-        (function (pageNum) {
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "shot-pagination__btn" + (pageNum === currentPage ? " is-active" : "");
-          btn.textContent = String(pageNum);
-          btn.setAttribute("aria-label", "Page " + pageNum);
-          if (pageNum === currentPage) {
-            btn.setAttribute("aria-current", "page");
-          }
-          btn.addEventListener("click", function () {
-            renderPage(pageNum);
-            grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
-          });
-          nav.appendChild(btn);
-        })(p);
-      }
-
-      // Next button
-      var nextBtn = document.createElement("button");
-      nextBtn.type = "button";
-      nextBtn.className = "shot-pagination__btn shot-pagination__btn--next";
-      nextBtn.innerHTML = "Next &rarr;";
       nextBtn.disabled = currentPage === totalPages;
-      nextBtn.setAttribute("aria-label", "Next page");
-      nextBtn.addEventListener("click", function () {
-        renderPage(currentPage + 1);
-        grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
-      nav.appendChild(nextBtn);
-
-      // Counter info: "Showing 1–5 of 17"
-      var start = (currentPage - 1) * pageSize + 1;
-      var end = Math.min(currentPage * pageSize, items.length);
-      var info = document.createElement("span");
-      info.className = "shot-pagination__info";
-      info.textContent = "(" + start + "\u2013" + end + " of " + items.length + ")";
-      nav.appendChild(info);
     }
+
+    prevBtn.addEventListener("click", function () {
+      if (currentPage > 1) {
+        renderPage(currentPage - 1);
+      }
+    });
+
+    nextBtn.addEventListener("click", function () {
+      if (currentPage < totalPages) {
+        renderPage(currentPage + 1);
+      }
+    });
 
     renderPage(1);
   })();
