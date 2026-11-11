@@ -8,7 +8,7 @@ No Node, no bundler, no client-side framework — a ~800-line Python generator t
 python build.py --serve
 ```
 
-then open **http://localhost:8000**.
+then open **http://localhost:1000**.
 
 ---
 
@@ -168,7 +168,7 @@ domain in **Settings → Pages**.
 
 ```bash
 python build.py                    # build into ./dist
-python build.py --serve            # build, then preview at localhost:8000
+python build.py --serve            # build, then preview at localhost:1000
 python build.py --serve --port 3000
 python build.py --site-url https://example.com   # override the URL for one build
 python build.py --no-minify        # keep main.css readable, for debugging

@@ -3,7 +3,7 @@
 Static site generator for this blog.
 
     python build.py                 # build into ./dist
-    python build.py --serve         # build, then preview at http://localhost:8000
+    python build.py --serve         # build, then preview at http://localhost:1000
     python build.py --site-url https://me.github.io/my-repo   # override site.yml url
 
 Content lives in ./content, templates in ./templates, static assets in ./static.
@@ -708,7 +708,7 @@ def main():
     ap.add_argument("--site-url", help="Public site URL (overrides site.yml)")
     ap.add_argument("--out", default="dist", help="Output directory (default: dist)")
     ap.add_argument("--serve", action="store_true", help="Serve the built site locally after building")
-    ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--port", type=int, default=1000)
     ap.add_argument("--no-minify", action="store_true")
     args = ap.parse_args()
 

@@ -52,6 +52,51 @@
     - "Full PropTech booking engine with dynamic pricing calculations, wishlists, and stay extensions"
     - "In-app Stripe mobile SDK integration with payment sheet checkout and digital invoice generation"
     - "Interactive Google Maps property discovery, Firebase push notifications, and global deep linking"
+  screenshots:
+    - src: assets/img/projects/stavoya/Screenshot_20261110_171511.webp
+      alt: Stavoya - Screen 1
+    - src: assets/img/projects/stavoya/Screenshot_20261110_171644.webp
+      alt: Stavoya - Screen 2
+    - src: assets/img/projects/stavoya/Screenshot_20261110_171652.webp
+      alt: Stavoya - Screen 3
+    - src: assets/img/projects/stavoya/Screenshot_20261110_171659.webp
+      alt: Stavoya - Screen 4
+    - src: assets/img/projects/stavoya/Screenshot_20261110_172219.webp
+      alt: Stavoya - Screen 5
+    - src: assets/img/projects/stavoya/Screenshot_20261110_172232.webp
+      alt: Stavoya - Screen 6
+    - src: assets/img/projects/stavoya/Screenshot_20261110_172504.webp
+      alt: Stavoya - Screen 7
+    - src: assets/img/projects/stavoya/Screenshot_20261110_192255.webp
+      alt: Stavoya - Screen 8
+    - src: assets/img/projects/stavoya/Screenshot_20261110_193340.webp
+      alt: Stavoya - Screen 9
+    - src: assets/img/projects/stavoya/Screenshot_20261110_193829.webp
+      alt: Stavoya - Screen 10
+    - src: assets/img/projects/stavoya/Screenshot_20261110_193834.webp
+      alt: Stavoya - Screen 11
+    - src: assets/img/projects/stavoya/Screenshot_20261110_193844.webp
+      alt: Stavoya - Screen 12
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194014.webp
+      alt: Stavoya - Screen 13
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194021.webp
+      alt: Stavoya - Screen 14
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194028.webp
+      alt: Stavoya - Screen 15
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194229.webp
+      alt: Stavoya - Screen 16
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194445.webp
+      alt: Stavoya - Screen 17
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194550.webp
+      alt: Stavoya - Screen 18
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194850.webp
+      alt: Stavoya - Screen 19
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194858.webp
+      alt: Stavoya - Screen 20
+    - src: assets/img/projects/stavoya/Screenshot_20261110_194936.webp
+      alt: Stavoya - Screen 21
+    - src: assets/img/projects/stavoya/Screenshot_20261110_195047.webp
+      alt: Stavoya - Screen 22
 
 - name: Aigosys
   tagline: A student-centric mobile education platform built with Flutter, Clean Architecture, BLoC, and Cloudflare Stream.
@@ -85,39 +130,188 @@
     - "Production network resilience with dedicated fallback screens for 500 server errors and offline states"
   screenshots:
     # Light Mode
-    - src: assets/img/projects/aigosys/light-1.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-37-58-61_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Course List Page
-    - src: assets/img/projects/aigosys/light-2.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-38-22-05_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Course Detail Page
-    - src: assets/img/projects/aigosys/light-3.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-38-39-92_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - My Learning List Page
-    - src: assets/img/projects/aigosys/light-5.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-39-16-61_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Login Page
-    - src: assets/img/projects/aigosys/light-6.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-40-07-14_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - OTP Verification Page
-    - src: assets/img/projects/aigosys/light-7.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-41-03-49_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Splash Screen
-    - src: assets/img/projects/aigosys/light-8.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-41-37-45_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Reading Page
-    - src: assets/img/projects/aigosys/light-9.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-41-44-95_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Light Mode) - Quiz Page
     # Dark Mode
-    - src: assets/img/projects/aigosys/dark-1.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-19-499_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Quiz Page
-    - src: assets/img/projects/aigosys/dark-2.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-24-303_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - My Learning
-    - src: assets/img/projects/aigosys/dark-3.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-28-233_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Profile
-    - src: assets/img/projects/aigosys/dark-4.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-32-225_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Edit Profile
-    - src: assets/img/projects/aigosys/dark-5.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-50-645_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Splash Screen
-    - src: assets/img/projects/aigosys/dark-6.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-50-58-304_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Login Page
-    - src: assets/img/projects/aigosys/dark-7.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-51-18-095_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - Welcome Screen
-    - src: assets/img/projects/aigosys/dark-8.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-08-10-10-51-44-245_com.example.aigosys.webp
       alt: Aigosys (Dark Mode) - OTP Verification
-    - src: assets/img/projects/aigosys/dark-9.jpg
+    - src: assets/img/projects/aigosys/Screenshot_2026-09-04-10-38-49-91_57a135599ccd6073254ece08eec7d604.webp
       alt: Aigosys (Dark Mode) - Course List Page
+
+- name: Where Money Goes
+  tagline: A cross-platform personal finance & expense manager built with Flutter, Clean Architecture, BLoC, and Firebase.
+  description: Personal finance and expense management mobile application engineered with Flutter and Firebase. Features Clean Architecture, flutter_bloc unidirectional state management, declarative go_router navigation, fl_chart analytics visualizations, and real-time Cloud Firestore cloud sync.
+  tech:
+    - Flutter
+    - Dart
+    - Clean Architecture
+    - BLoC
+    - Firebase Auth
+    - Cloud Firestore
+    - go_router
+    - get_it
+    - fl_chart
+  filters:
+    - flutter
+  status: Completed
+  github: ""
+  demo: ""
+  featured: false
+  preview:
+    - "$ where-money-goes --status"
+    - "Flutter SDK ^3.12.2 · Clean Architecture"
+    - "State: flutter_bloc (^9.1.1) + equatable (^2.0.7)"
+    - "Routing: go_router (^16.1.0) · DI: get_it (^8.2.0)"
+    - "Backend: Cloud Firestore · Charts: fl_chart"
+  highlights:
+    - "Strict Clean Architecture layer decoupling across presentation, domain, and data layers"
+    - "Unidirectional data flow (UDF) powered by flutter_bloc with Equatable value equality"
+    - "Declarative routing with go_router including authentication redirects and nested shell navigation"
+    - "Decoupled dependency injection utilizing get_it service locator with singletons and factories"
+    - "Real-time multi-device cloud synchronization with Cloud Firestore snapshot listeners"
+    - "Interactive expense and cash flow data visualizations powered by fl_chart (pie and trend charts)"
+    - "Strict server-side Cloud Firestore security rules enforcing complete user-level data isolation"
+  screenshots:
+    # Light Mode Screens
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-17-58-97_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Welcome & Splash
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-18-46_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Authentication & Sign In
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-25-38_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Sign Up Screen
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-35-21_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Setup & Preferences
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-41-88_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Account Verification
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-47-94_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Dashboard Overview
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-18-53-45_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Income & Expense Summary
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-09-30_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Transactions List
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-15-74_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Transaction Details
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-22-28_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Add New Expense
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-33-07_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Category Picker
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-47-91_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Financial Analytics
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-19-55-33_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Category Breakdown Chart
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-20-17-25_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Monthly Trends Graph
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-20-24-75_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Budget Settings
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-20-34-57_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Budget Progress & Alerts
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-20-44-19_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - User Profile
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-20-55-52_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Security & Preferences
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-04-86_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes - Currency & Export
+    # Dark Mode Screens
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-26-68_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes (Dark Mode) - Dashboard
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-30-64_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes (Dark Mode) - Analytics
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-34-55_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes (Dark Mode) - Transactions List
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-39-26_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes (Dark Mode) - Add Expense
+    - src: assets/img/projects/where_money_goes/Screenshot_2026-11-10-20-21-49-14_dbe21d399f61f5461e631befc6abbedc.webp
+      alt: Where Money Goes (Dark Mode) - Profile & Settings
+
+- name: Zyli
+  tagline: A next-generation conversational AI voice agent built with Flutter, Clean Architecture, WebRTC, and hardware Echo Cancellation.
+  description: Real-time bidirectional conversational AI mobile application built with Flutter adhering to Clean Architecture principles. Features WebRTC peer-to-peer audio streaming, WebSocket signaling, hardware Acoustic Echo Cancellation (AEC), animated glassmorphic audio visualizers, and hardware-encrypted security.
+  tech:
+    - Flutter
+    - Dart
+    - Clean Architecture
+    - BLoC
+    - WebRTC
+    - WebSockets
+    - audio_session
+    - flutter_secure_storage
+    - AI & Audio DSP
+  filters:
+    - flutter
+    - ai
+  status: Completed
+  github: ""
+  demo: ""
+  featured: false
+  preview:
+    - "$ zyli --webrtc-stream"
+    - "Flutter SDK ^3.13.5 · Clean Architecture"
+    - "Audio: WebRTC (flutter_webrtc) + WebSocket Signaling"
+    - "DSP Engine: Acoustic Echo Cancellation (AEC)"
+    - "State: flutter_bloc · Security: flutter_secure_storage"
+  highlights:
+    - "Full-duplex real-time AI voice conversation powered by WebRTC peer connections and WebSocket signaling"
+    - "Hardware-level Acoustic Echo Cancellation (AEC) using audio_session voiceCommunication DSP mode"
+    - "Strict Clean Architecture layer separation across Domain, Data, and Presentation"
+    - "Reactive BLoC state management streaming live AI speaking status and connection states"
+    - "Dynamic AI glowing orb and custom mathematical sine-wave background canvas animations"
+    - "Live WhatsApp-style streaming transcription bubbles with intelligent bouncing scroll physics"
+    - "Enterprise-grade credential encryption with flutter_secure_storage via Android Keystore and iOS Keychain"
+  screenshots:
+    # Light Mode / Setup Screens
+    - src: assets/img/projects/zyli/Screenshot_20261030_144342.webp
+      alt: Zyli - Splash & Welcome
+    - src: assets/img/projects/zyli/Screenshot_20261108_142050.webp
+      alt: Zyli - API Key Authentication
+    - src: assets/img/projects/zyli/Screenshot_20261108_142057.webp
+      alt: Zyli - Home & Agent Select
+    - src: assets/img/projects/zyli/Screenshot_20261108_142140.webp
+      alt: Zyli - Voice Configuration
+    - src: assets/img/projects/zyli/Screenshot_20261108_142157.webp
+      alt: Zyli - Audio Permissions & Setup
+    - src: assets/img/projects/zyli/Screenshot_20261110_194337.webp
+      alt: Zyli - Call History
+    - src: assets/img/projects/zyli/Screenshot_20261110_194344.webp
+      alt: Zyli - Settings & Preferences
+    # Dark Mode / Active Voice Call Screens
+    - src: assets/img/projects/zyli/Screenshot_20261108_142104.webp
+      alt: Zyli - Voice Call Connecting
+    - src: assets/img/projects/zyli/Screenshot_20261108_142144.webp
+      alt: Zyli - Live AI Orb & Ambient Waves
+    - src: assets/img/projects/zyli/Screenshot_20261108_142204.webp
+      alt: Zyli - Live Audio Conversation & Control Dock
+    - src: assets/img/projects/zyli/Screenshot_20261110_194353.webp
+      alt: Zyli - Streaming Transcription Chat
+    - src: assets/img/projects/zyli/Screenshot_20261110_194358.webp
+      alt: Zyli - Call Summary & Metrics
+
+
 
