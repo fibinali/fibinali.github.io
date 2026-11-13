@@ -857,9 +857,11 @@ def main():
             intro="Every article on the site, newest first. Filter by category to narrow things down.",
             posts=posts, filters=all_cats, nav_active="")
     for t in topics:
+        topic_projs = projects if t["slug"] == "projects" else None
         listing(f"topics/{t['slug']}/index.html", crumbs=[("Topics", "articles/"), (t["name"], f"topics/{t['slug']}/")],
                 heading=t["name"], topic=t, page_title=f"{t['name']} articles | {cfg['name']}",
                 page_description=t["description"], intro=t["description"], posts=t["posts"],
+                topic_projects=topic_projs,
                 filters=[c for c in t["category_counts"] if c["count"]],
                 nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity") else "")
 
@@ -954,7 +956,7 @@ def main():
     urls = "".join(
         f"<url><loc>{xml_escape(u)}</loc>" + (f"<lastmod>{lm}</lastmod>" if lm else "") + "</url>"
         for u, lm in pages_for_sitemap)
-    write(out, "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
+    write(out, "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
     write(out, "robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {abs_url('sitemap.xml')}\n")
 
     total = sum(1 for _ in out.rglob("*") if _.is_file())
