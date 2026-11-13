@@ -32,7 +32,9 @@
       <nav aria-label="Footer categories">
         <h2 class="footer__h">Categories</h2>
         <ul>
-          {% for t in topics %}<li><a href="{{ root }}topics/{{ t.slug }}/">{{ t.name }}</a></li>{% endfor %}
+          {% for t in topics %}
+          <li><a href="{% if t.slug == 'projects' %}{{ root }}projects/{% else %}{{ root }}topics/{{ t.slug }}/{% endif %}">{{ t.name }}</a></li>
+          {% endfor %}
         </ul>
       </nav>
 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "macros.html" import card, breadcrumb, empty_state with context %}
+{% from "macros.html" import card, project_card, breadcrumb, empty_state with context %}
 
 {% block content %}
 <section class="page-head{% if topic %} topic-{{ topic.slug }}{% endif %}">
@@ -12,7 +12,7 @@
         <p class="page-head__lead">{{ intro }}</p>
       </div>
     </div>
-    {% if topic and topic.slug == 'projects' %}
+    {% if topic and topic.slug == 'projects' and not topic_projects %}
     <p class="page-head__note">Looking for the code? See the <a href="{{ root }}projects/">projects showcase</a>.</p>
     {% endif %}
     {% if filters|length > 1 %}
@@ -35,6 +35,10 @@
     {% if filters|length > 1 %}
     {{ empty_state('No matching articles', 'Try selecting a different filter above.', icon_name='search', action_label='Reset filter', action_attrs='data-filter-reset', attrs='data-filter-empty hidden') }}
     {% endif %}
+    {% elif topic_projects %}
+    <div class="grid">
+      {% for p in topic_projects %}{{ project_card(p) }}{% endfor %}
+    </div>
     {% else %}
       {% if is_tag %}
       {{ empty_state('No articles found', 'No articles have been tagged with this topic yet.', icon_name='tag', action_label='View all tags', action_url=root ~ 'tags/') }}
