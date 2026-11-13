@@ -106,17 +106,24 @@
       </div>
     </div>
     <div class="topic-grid">
-      {% for t in topics %}
-      <a class="topic-card topic-{{ t.slug }} reveal" href="{{ root }}topics/{{ t.slug }}/">
-        <span class="topic-card__icon">{{ icon(t.icon, 22) }}</span>
-        <h3>{{ t.name }}</h3>
-        <p>{{ t.description }}</p>
-        <ul class="topic-card__kw" aria-label="Subtopics">
-          {% for k in t.keywords[:4] %}<li>{{ k }}</li>{% endfor %}
-        </ul>
-        <span class="topic-card__foot"><span>{{ t.count }} article{{ '' if t.count == 1 else 's' }}</span><span class="card__more" aria-hidden="true">Explore {{ icon('arrow', 16) }}</span></span>
-      </a>
-      {% endfor %}
+        {% for t in topics %}
+        <a class="topic-card topic-{{ t.slug }} reveal" href="{% if t.slug == 'projects' %}{{ root }}projects/{% else %}{{ root }}topics/{{ t.slug }}/{% endif %}">
+          <span class="topic-card__icon">{{ icon(t.icon, 22) }}</span>
+          <h3>{{ t.name }}</h3>
+          <p>{{ t.description }}</p>
+          <ul class="topic-card__kw" aria-label="Subtopics">
+            {% for k in t.keywords[:4] %}<li>{{ k }}</li>{% endfor %}
+          </ul>
+          <span class="topic-card__foot">
+            {% if t.slug == 'projects' %}
+            <span>{{ projects|length }} project{{ '' if projects|length == 1 else 's' }}</span>
+            {% else %}
+            <span>{{ t.count }} article{{ '' if t.count == 1 else 's' }}</span>
+            {% endif %}
+            <span class="card__more" aria-hidden="true">Explore {{ icon('arrow', 16) }}</span>
+          </span>
+        </a>
+        {% endfor %}
     </div>
   </div>
 </section>

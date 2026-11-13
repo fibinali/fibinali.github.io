@@ -830,7 +830,10 @@ def main():
     featured = [p for p in posts if p.featured][:3]
     if len(featured) < 3 and len(posts) > 3:
         featured += [p for p in posts if p not in featured][: 3 - len(featured)]
+    # If there are few posts, show all recent posts in Latest articles rather than hiding them
     latest = [p for p in posts if p not in featured][:6]
+    if not latest and posts:
+        latest = posts[:6]
     feat_project = next((x for x in projects if x.get("featured")), projects[0] if projects else None)
     render(
         "home.html", "index.html", posts=posts, featured=featured, latest=latest, projects=projects,
@@ -939,7 +942,8 @@ def main():
                 f"<description>{xml_escape(p.description)}</description>{cats}"
                 f"<content:encoded><![CDATA[{content}]]></content:encoded></item>")
 
-    feed = ('<?xml version="1.0" encoding="UTF-8"?>'
+    feed = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<?xml-stylesheet type="text/xsl" href="feed.xsl"?>\n'
             '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">'
             f"<channel><title>{xml_escape(cfg['name'])}</title><link>{abs_url('')}</link>"
             f"<description>{xml_escape(cfg['description'])}</description><language>{cfg['language']}</language>"
