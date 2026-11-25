@@ -486,7 +486,8 @@
     function escapeReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
     function highlight(text, terms) {
       if (!terms.length) return escapeHtml(text);
-      var re = new RegExp("(" + terms.map(escapeReg).join("|") + ")", "ig");
+      var safeTerms = terms.map(escapeHtml).map(escapeReg);
+      var re = new RegExp("(" + safeTerms.join("|") + ")", "ig");
       return escapeHtml(text).replace(re, "<mark>$1</mark>");
     }
     function snippet(text, terms, radius) {
