@@ -252,8 +252,8 @@
       alt: Where Money Goes (Dark Mode) - Profile & Settings
 
 - name: Zyli
-  tagline: A next-generation conversational AI voice agent built with Flutter, Clean Architecture, WebRTC, and hardware Echo Cancellation.
-  description: Real-time bidirectional conversational AI mobile application built with Flutter adhering to Clean Architecture principles. Features WebRTC peer-to-peer audio streaming, WebSocket signaling, hardware Acoustic Echo Cancellation (AEC), animated glassmorphic audio visualizers, and hardware-encrypted security.
+  tagline: A real-time conversational voice assistant mobile frontend built with Flutter, Clean Architecture, and WebRTC audio streaming.
+  description: Cross-platform Flutter mobile client for real-time bidirectional voice conversations. Adheres to Clean Architecture and BLoC state management, featuring WebRTC audio streaming, WebSocket signaling, hardware Acoustic Echo Cancellation (AEC), and an animated glassmorphic interface.
   tech:
     - Flutter
     - Dart
@@ -263,10 +263,8 @@
     - WebSockets
     - audio_session
     - flutter_secure_storage
-    - AI & Audio DSP
   filters:
     - flutter
-    - ai
   status: Completed
   github: ""
   demo: ""

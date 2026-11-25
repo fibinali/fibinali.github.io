@@ -793,9 +793,10 @@ def main():
         site=cfg, icon=icon, hero_network=hero_network_svg, topic_by_slug=topic_by_slug,
         topics=topics, versions=versions, now=dt.date.today(),
         nav=[
-            ("home", "Home", ""), ("ai", "AI", "topics/ai/"),
+            ("home", "Home", ""),
+            ("programming", "Programming", "topics/programming/"),
+            ("ai", "AI", "topics/ai/"),
             ("cybersecurity", "Cybersecurity", "topics/cybersecurity/"),
-            ("tutorials", "Tutorials", "tutorials/"),
             ("projects", "Projects", "projects/"),
             ("about", "About", "about/"),
         ],
@@ -863,7 +864,7 @@ def main():
                 page_description=t["description"], intro=t["description"], posts=t["posts"],
                 topic_projects=topic_projs,
                 filters=[c for c in t["category_counts"] if c["count"]],
-                nav_active=t["slug"] if t["slug"] in ("ai", "cybersecurity") else "")
+                nav_active=t["slug"] if t["slug"] in ("programming", "ai", "cybersecurity") else "")
 
     tut = [p for p in posts if p.type == "tutorial"]
     listing("tutorials/index.html", crumbs=[("Tutorials", "tutorials/")], heading="Tutorials",

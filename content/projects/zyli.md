@@ -1,8 +1,8 @@
 ## Project Overview
 
-**Zyli** (configured as the **Zoftcares HR Voice Assistant**) is a next-generation real-time conversational AI mobile application built with **Flutter**. As generative AI shifts from text-based chatbots to low-latency bidirectional voice experiences, Zyli delivers fluid, interruptible, hands-free voice interactions with an intelligent agent.
+**Zyli** is a cross-platform mobile client application engineered with **Flutter**, designed as the frontend interface for real-time bidirectional voice conversations. Connecting to an AI voice backend, the mobile app handles the full client-side multimedia experience: ultra-low latency audio streaming, hardware echo cancellation, and interactive visual feedback.
 
-The application combines **Clean Architecture**, reactive **BLoC** state management, ultra-low-latency **WebRTC** peer connections over WebSockets, hardware-level **Acoustic Echo Cancellation (AEC)**, and a futuristic glassmorphic UI with dynamic animated canvas visualizations.
+The application combines **Clean Architecture**, reactive **BLoC** state management, client-side **WebRTC** peer connections over WebSockets, hardware-level **Acoustic Echo Cancellation (AEC)**, and a futuristic glassmorphic UI with dynamic animated canvas visualizers.
 
 ---
 
