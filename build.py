@@ -945,7 +945,6 @@ def main():
                 f"<content:encoded><![CDATA[{content}]]></content:encoded></item>")
 
     feed = ('<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<?xml-stylesheet type="text/xsl" href="feed.xsl"?>\n'
             '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">'
             f"<channel><title>{xml_escape(cfg['name'])}</title><link>{abs_url('')}</link>"
             f"<description>{xml_escape(cfg['description'])}</description><language>{cfg['language']}</language>"
@@ -956,7 +955,7 @@ def main():
     urls = "".join(
         f"<url><loc>{xml_escape(u)}</loc>" + (f"<lastmod>{lm}</lastmod>" if lm else "") + "</url>"
         for u, lm in pages_for_sitemap)
-    write(out, "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
+    write(out, "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
     write(out, "robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {abs_url('sitemap.xml')}\n")
 
     total = sum(1 for _ in out.rglob("*") if _.is_file())
