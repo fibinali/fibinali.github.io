@@ -197,15 +197,14 @@
   <div class="container">
     <div class="rss-card reveal">
       <div>
-        <h2 id="rss-h">Follow along with RSS</h2>
-        <p>No account and no tracking. Add the feed to any reader and new articles show up when they're published.</p>
+        <h2 id="rss-h">Subscribe via RSS</h2>
+        <p>No account, no emails, and no tracking. Copy the feed link below and paste it into your favorite RSS reader (like Feedly or NetNewsWire) to receive new posts automatically.</p>
       </div>
       <div class="rss-card__actions">
         <div class="copy-field">
           <input type="text" readonly value="{{ site.url }}/feed.xml" aria-label="RSS feed URL" data-copy-source>
-          <button type="button" class="btn btn--ghost btn--sm" data-copy-btn>{{ icon('copy', 16) }}<span>Copy</span></button>
+          <button type="button" class="btn btn--primary btn--sm" data-copy-btn>{{ icon('copy', 16) }}<span>Copy Feed URL</span></button>
         </div>
-        <a class="btn btn--primary" href="{{ root }}feed.xml">{{ icon('rss', 18) }} Open feed</a>
       </div>
     </div>
   </div>
